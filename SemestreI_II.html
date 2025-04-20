@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Budget Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Yatra+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="icon" href="/img/LogoRedondo.png" type="image/png">
+    
+</head>
+<body>
+    <header>
+        <nav class="bg-fuchsia-700 fixed top-0 w-full z-50 py-2 px-4">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <!-- Botón Movil-->
+                        <button type="button" id="menu-toggle" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
+                      <!-- Icono de menú aquí (por ejemplo, un ícono de hamburguesa) -->
+                            <span class="sr-only">Abrir menú</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+  
+                    <!--NavBar contenido-->
+                    </div>
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div class="flex shrink-0 items-center">
+                            <img class="h-14 w-14 rounded-full transition-transform duration-500 hover:scale-150" src="img/Logo.png" alt="Logo"> <!--Logo del proyecto-->
+                        </div>
+                        <div class="hidden sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                        <!--Enlaces en la  Navbar -->
+                                <a href="index.html" class="rounded-md bg-gray-900 px-4 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500" aria-current="page">Inicio</a>
+                                <a href="SemestreI_II.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
+                                <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
+                                <a href="SemestreIV.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-x-8">
+                        <a href="https://bossbudgetproyect.github.io/SitioWeb/" class="rounded-full bg-yellow-600 px-5 py-5 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] text-black hover:text-fuchsia-900" aria-current="page">Versión alpha</a>
+                  
+    <!-- Menú desplegable, mostrar/ocultar según el estado del menú. Aqui se explica el uso de Tailwind CSS para las animaciones del Menu despegable en español para entenderlo un poco mejor
+                       Ingresando: "duración de la salida lenta de transición-100"
+                        Desde: "transformar opacidad-0 escala-95"
+                         Hasta: "transformar opacidad-100 escala-100" 
+                       Salida: "transición lenta-duración de entrada-75"
+                        Desde: "transformar opacidad-100 escala-100"
+                         Para: "transformar opacidad-0 escala-95" -->
+                    </div>
+                </div>
+            </div>
+              <!-- Menú móvil, mostrar/ocultar según el estado del menú. -->
+            <div class="sm:hidden" id="mobile-menu">
+                <div class="space-y-1 px-2 pt-2 pb-3">
+                  
+                    <a href="index.html" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white  hover:text-yellow-500" aria-current="page">Inicio</a>
+                    <a href="SemestreI_II.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
+                    <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
+                    <a href="SemestreIV.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre IV</a>
+                </div>
+            </div>
+        </nav>
+    </header>  
+    
+    <section class="bg-white pt-20 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+          <h1 class="text-4xl sm:text-5xl font-bold text-yellow-600 mb-1 font-['Bebas_Neue']">
+            Boss Budget - Semestre I y II
+          </h1>
+          <p class="text-lg sm:text-xl text-gray-700 font-['Roboto'] mb-1">
+            ¿Que se desarrollo en Boss Budget durante el primer y segundo semestre?
+          </p>
+        </div>
+    </section>
+    
+
+    <!--Primer seccion -->
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+          <!-- Texto a la izquierda -->
+          <div class="md:w-1/2">
+            <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Planteamiento del problema</h2>
+            <p class="text-lg text-gray-700 text-left">
+                ¿Cómo instruir a las personas al adecuado manejo del presupuesto a través de una aplicación móvil/multiplataforma que cumpla con las necesidades de cada usuario y mejore su calidad de vida mediante herramientas financieras?
+            </p>
+          </div>
+          <!-- Imágenes a la derecha -->
+          <div class="md:w-1/2 flex justify-center">
+            <img src="img/FichaExperimento.png" alt="Ficha de Esperimento" class="w-[420px] h-[570px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
+        </div>
+    </section>
+
+    <!--Segunda Seccion-->
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <!-- documento a la izquierda -->
+            <div>
+                <iframe src="docs/Boss-Budget.pdf"class="w-[490px] h-[620px] rounded-[3%] mx-[40px] shadow-md"></iframe>
+            </div>
+          <!-- Texto a la derecha-->
+          <div class="md:w-1/2">
+            <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Objetivos específicos</h2>
+            <ul class="pl-[30px] text-left text-lg text-gray-700 list-disc space-y-2">
+                <li>Diseñar un modelo estadístico que me permita recolectar los datos para identificar los usos financieros y las falencias.</li>
+                <li>Desarrollar una encuesta que permita el análisis de los datos de nuestra estadística en el uso de aplicaciones financieras.</li>
+                <li>Diseñar el maquetado de la aplicación.</li>
+                <li>Aplicar triple restricción al proyecto</li>
+                <li>Diseñar hipótesis a través de nuestro método de recolección de datos</li>
+                <li>Aplicación de la matriz de riesgos.</li>
+                <li>Definir un gestor de base de datos para nuestro proyecto</li>
+                <li>Aplicar el modelo entidad relación a nuestro proyecto</li>
+                <li>Definir el lenguaje de programación más óptimo que vamos a utilizar</li>
+            </ul>              
+          </div>
+        </div>
+    </section>
+
+    <!--Tercer Seccion-->
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+          <!-- Texto a la izquierda -->
+          <div class="md:flex-[1.2]">
+            <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Introducción</h2>
+            <p class="text-lg text-gray-700 text-left">
+                Las finanzas personales en nuestro entorno son consideradas como algo transitorio, por lo cual se aborda de manera superficial y no se le da la importancia necesaria. Esto como consecuencia lleva a las personas a tener una negativa administración de sus ingresos, conduciendo a secuelas como tener que solicitar préstamos constantes, trabajar solo para subsistir , no poder ahorrar y no cumplir metas financieras. Esto en el presente no es solo una falencia sino que es perjudicial para sobrellevar la situación financiera del país y del mundo, ya que no se es consciente de la importancia de mejorar los hábitos financieros y el impacto positivo que puede ocasionar en la vida cotidiana de cada persona.
+                    A dónde se quiere llegar, es a poder ofrecer a las personas una opción factible para mejorar su situación financiera, logrando un control financiero de manera ordenada y completa. En este contexto exploramos las necesidades presentadas por las personas y se buscará que a partir de una serie de herramientas se pueda encontrar una solución a corto, mediano o largo plazo dependiendo de las secuelas evidenciadas.
+                    En este escrito se expondrá el proceso de desarrollo de una app móvil que cubra las necesidades extraídas de una recopilación de datos que tomaremos de encuestas dirigidas a todas aquellas personas interesadas en manejar su presupuesto de manera digital, de estos datos se busca agrupar los hábitos perjudiciales más repetitivos entre estas. A partir de esto la app será capaz de brindar herramientas como mostrar de manera cronológica un presupuesto tanto presente como futuro, registrar ingresos y egresos tanto fijos como variables, debitar pagos automáticamente por medio de notificaciones, brindar tips para el mejoramiento de hábitos financieros, personalizar su perfil y manejar diferentes categorías de ingreso de datos dependiendo del usuario.
+            </p>
+          </div>
+          <!-- Imágenes a la derecha -->
+          <div class="md:flex-[0.8] flex justify-center">
+            <img src="img/budget.png" alt="Imagen Budget" class="w-[496px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
+        </div>
+    </section>
+    <!--Cuarta Seccion-->
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <!-- Imágenes a la izquierda -->
+            <div class="md:w-1/2 flex justify-center">
+                <img src="img/MapaEmpatia.png" alt="Mada de empatia" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+          <!-- Texto a la derecha -->
+            <div class="md:w-1/2">
+                <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Metodología</h2>
+                <p class="text-lg text-gray-700 text-center">
+                    El objetivo de la presente investigación será la recolección de información clara y completa de las personas a través de una serie de encuestas que tendrán como finalidad conocer sus hábitos financieros, sus experiencias y opiniones frente a herramientas financieras completas y  en el caso de estar interesadas en una nueva herramienta de este nivel, cuál sería la funcionalidad que destacaría frente a las ya existentes.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!--Quinta Seccion-->
+    <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-yellow-500 mb-4 text-center">Instrumento de recolección de datos</h2>
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+          <!-- Texto a la izquierda -->
+          <div class="md:flex-[1.2]">
+            <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Encuesta analitica online con restrospectiva</h3>
+            <ul class="pl-[30px] text-left text-lg text-gray-700 list-disc space-y-2">
+                <li>Es una encuesta que analiza información adquirida según preguntas cortas y concretas de formato abierto y cerrado  referente a la experiencia del encuestado de manera online.</li>
+                <li>La realización de la encuesta será a través de la plataforma Microsoft Forms, haciendo uso de un correo personal por cada usuario que participe en la misma.</li>
+            </ul>  
+          </div>
+            <!-- links a la derecha -->
+          <div class="md:flex-[0.8]">
+            <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-left">Encuesta online</h3>
+            <a href="https://forms.office.com/r/4Bnr00V7KH" target="_blank" class="inline-block px-5 py-2.5 m-2 text-white bg-gray-700 no-underline rounded-md font-bold transition-colors duration-300 hover:bg-yellow-500">
+            Ingrese a la encuesta
+            </a>
+            <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-left">Resultados de Encuesta de seguimiento presupuestal</h3>
+            <a href="https://forms.office.com/Pages/AnalysisPage.aspx?AnalyzerToken=8lk4spmxeGsIByi0wmnZxkSeST1p4b5s&id=iISfkzSdDEemwIz1m5QbtvvFYtrViWtJkVpkPeo0-fFUNk9PSU9HMTBYSVMwSjJRNEFPRkM1TzIxSC4u" target="_blank" class="inline-block px-5 py-2.5 m-2 text-white bg-gray-700 no-underline rounded-md font-bold transition-colors duration-300 hover:bg-yellow-500">
+            Respuestas de la encuesta
+            </a>
+          </div>
+        </div>
+    </section>
+    <!--Seccion de graficas-->
+    <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-yellow-500 mb-4 text-center">Graficas tomadas del resultado de la encuesta</h2>
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <!-- imagen a la izquierda -->
+            <div class="md:flex-[1.1] flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">¿Qué motivó impide aplicar recurrentemente un debido hábito para el manejo del presupuesto personal y/o familiar?</h3>
+                <img src="img/Grafica1.png" alt="Primer Grafica" class="w-[680px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+            <!-- Texto a la derecha -->
+            <div class="md:flex-[0.9]">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Preguntas cerradas</h3>
+                <p class="text-lg text-gray-700 text-center">
+                    A partir de las preguntas cerradas se sacaron los siguientes resultados:
+                    De la interrogante “Actualmente usted ¿Utiliza alguna herramienta para llevar el manejo de su presupuesto?” resalta que:
+                    El 71% de los encuestados (34)  responde no utilizar, y el 29% (14) restante utiliza diferentes métodos de los cuales destaca el uso de tablas de excel. 
+                    Y de la interrogante “Partiendo de su experiencia o necesidad ¿Qué factores son importantes para que una aplicación web, móvil o alguna herramienta tecnológica deba implementar para ayudar a su control de gastos o corregir alguna herramienta existente?” resalta que:
+                    La gran mayoría de encuestados buscan una herramienta que tenga una interfaz sencilla, donde los datos y resultados se reflejen gráficamente, que el usuario no requiera tener grandes conocimientos financieros para manejar la herramienta, igualmente que al ser intuitiva maneje ciertos tips y sugerencias para poder aportar a el usuario una mejora educativa financieramente, logrando llevar unas finanzas inteligentes.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <!-- imagen a la izquierda -->
+            <div class="md:w-1/2 flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Si tuviera que llevar un control de su presupuesto, a través de una aplicación móvil, ¿Cuáles de estas características le gustaría tener a su servicio</h3>
+                <img src="img/Grafica2.png" alt="Segunda Grafica" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+            <!-- imagen a la derecha -->
+            <div class="md:w-1/2 flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Poniéndose en situación en la cuál una persona le pide la ayuda para controlar su vida económica y encontrar una estabilidad para mejorar su calidad de vida ¿Qué método le aconsejaría?</h3>
+                <img src="img/Grafica3.png" alt="Tercer Grafica" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+        </div>
+    </section>
+    <!--Adicionales-->
+    <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-yellow-500 mb-4 text-center">Adicionales</h2>
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <!-- imagen a la izquierda -->
+            <div class="md:w-1/2 flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Triple restricción</h3>
+                <img src="img/TripleRestriccion.png" alt="Triple restricción" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+            <!-- imagen a la derecha -->
+            <div class="md:w-1/2 flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Matriz de riesgos</h3>
+                <img src="img/MatrizRiesgos.png" alt="Matriz de riesgos" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+        </div>
+    </section>
+    <section class="w-full bg-white pt-4 pb-16 px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+            <!-- imagen a la izquierda -->
+            <div class="md:w-1/2 flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Aplicación de metodología</h3>
+                <img src="img/TableroKanban.png" alt="Tablero Kanban" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+            <!-- imagen a la derecha -->
+            <div class="md:w-1/2 flex flex-col items-center">
+                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Mapa de la propuesta</h3>
+                <img src="img/MapaPropuesta.png" alt="Mapa de la propuesta" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!--Footer-->
+    <footer class="bg- text-white py-10">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Información del Proyecto -->
+            <div class="text-center">
+              <h2 class="text-3xl sm:text-4xl font-['Bebas_Neue'] font-bold text-fuchsia-700">Boss Budget</h2>
+              <p class="mt-4 text-black text-lg sm:text-xl font-['Bebas_Neue'] font-bold text-black">
+                  Optimiza tus finanzas con nuestra plataforma intuitiva.
+              </p>
+          </div>
+      
+            <!-- Redes Sociales -->
+            <div>
+              <h3 class="text-lg font-['Bebas_Neue'] text-yellow-700">Contáctate y conoce más de Boss Budget</h3>
+              <div class="flex space-x-4 mt-2">
+                <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
+                  <img class="w-25 h-20" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                </a>
+                
+      
+                <a href="https://github.com/BossBudgetProyect" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']" PORTAFOLIO>
+                  <img class="w-20 h-20" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+                </a>
+      
+                <a href="mailto:bossbudgetproyect@gmail.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
+                  <img class="w-25 h-20" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
+                </a>
+                
+              </div>
+            </div>
+            
+          </div>
+      
+          <!-- Copyright -->
+          <div class="border-t border-black mt-6 pt-4 text-center font-['Bebas_Neue'] font-bold text-sm text-yellow-700">
+            © 2025 Boss Budget. Todos los derechos reservados.
+          </div>
+        </div>
+    </footer>      
+</body>
+</html>
