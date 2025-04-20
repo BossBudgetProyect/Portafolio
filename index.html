@@ -20,20 +20,12 @@
               <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   <!-- Botón Movil-->
-                  <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-                    <span class="absolute -inset-0.5"></span>
-                    <span class="sr-only">Abrir menú</span> <!--Texto descriptivo para usuarios con discapacidad visual.-->
-                   
-                    <!--Icono cuando el menú está cerrado. Menú abierto: "oculto", Menú cerrado: "bloquear"-->
-                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  <button type="button" id="menu-toggle" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
+                    <!-- Icono de menú aquí (por ejemplo, un ícono de hamburguesa) -->
+                    <span class="sr-only">Abrir menú</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-
-                    <!--Icono cuando el menú está abierto. Menú abierto: "bloquear", Menú cerrado: "oculto"-->
-                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-
                   </button>
 
                   <!--NavBar contenido-->
@@ -48,7 +40,7 @@
                       <a href="index.html" class="rounded-md bg-gray-900 px-4 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500" aria-current="page">Inicio</a>
                       <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
                       <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
-                      <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V </a>
+                      <a href="SemestreIV.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V </a>
                     </div>
                   </div>
                 </div>
@@ -66,11 +58,11 @@
                 </div>
               </div>
             </div>
-          
+            
             <!-- Menú móvil, mostrar/ocultar según el estado del menú. -->
             <div class="sm:hidden" id="mobile-menu">
               <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white  hover:text-yellow-500" aria-current="page">Inicio</a>
+                <a href="index.html" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white  hover:text-yellow-500" aria-current="page">Inicio</a>
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
                 <a href="SemestreIV.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre IV</a>
@@ -94,8 +86,8 @@
         <div class="relative w-[400px] h-[250px]">  <!-- Aumenté el ancho y reduje la altura -->
           <iframe 
               class="w-full h-full rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105"
-              src="https://www.youtube.com/embed/Fzy6dEgM6_w?autoplay=1&mute=1"
-              title="YouTube Shorts"
+              src="https://www.youtube.com/embed/Li7bQG6bBko?si=p-TY-01mPLVBLDku"
+              title="Boss Budget speech"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen>
@@ -217,3 +209,17 @@
     </footer>
     
 </body>
+
+
+<!-- menu despegable-->
+<script>
+  // Obtener los elementos del botón y el menú móvil
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Agregar un evento para alternar la visibilidad del menú
+  menuToggle.addEventListener('click', () => {
+    // Cambiar la clase de 'hidden' para mostrar u ocultar el menú
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>

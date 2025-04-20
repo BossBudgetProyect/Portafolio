@@ -8,102 +8,72 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Yatra+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="icon" href="/img/LogoRedondo.png" type="image/png">
     
 </head>
 
 <body>
     <header>
-      <nav class="bg-fuchsia-700 p-4">
-            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-              <div class="relative flex h-16 items-center justify-between">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  <!-- Botón Movil-->
-                  <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-                    <span class="absolute -inset-0.5"></span>
-                    <span class="sr-only">Abrir menú</span> <!--Texto descriptivo para usuarios con discapacidad visual.-->
-                   
-                    <!--Icono cuando el menú está cerrado. Menú abierto: "oculto", Menú cerrado: "bloquear"-->
-                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
+      <nav class="bg-fuchsia-700 fixed top-0 w-full z-50 py-2 px-4">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <!-- Botón Movil-->
+              <button type="button" id="menu-toggle" class="relative inline-flex items-center justify-center rounded-md p-2 text-black-400 hover:bg-yello-600 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
+                <!-- Icono de menú aquí (por ejemplo, un ícono de hamburguesa) -->
+                <span class="sr-only">Abrir menú</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </button>
 
-                    <!--Icono cuando el menú está abierto. Menú abierto: "bloquear", Menú cerrado: "oculto"-->
-                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-
-                  </button>
-
-                  <!--NavBar contenido-->
-                </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div class="flex shrink-0 items-center">
-                    <img class="h-14 w-14 rounded-full transition-transform duration-500 hover:scale-150" src="img/Logo.png" alt="Logo"> <!--Logo del proyecto-->
-                  </div>
-                  <div class="hidden sm:ml-6 sm:block">
-                    <div class="flex space-x-4">
-					  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Inicio</a>
-					  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
-					  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
-					  <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500">Semestre IV</a>
-					  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V</a>
-					</div>
-                  </div>
-                </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-x-8">
-                 <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" target="_blank">
-            <button type="button" class="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-              <span class="sr-only">Ir al canal de YouTube</span>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" 
-              alt="YouTube Logo" 
-              class="w-14 h-14 rounded-full">         
-              </button></a>
-
-              <a href="https://github.com/BossBudgetProyect/BossBudget.git" target="_blank">
-            <button type="button" class="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-              <span class="sr-only">Ir al repositorio de GitHub</span>
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                  alt="GitHub Logo" class="w-14 h-14 rounded-full">
-              </button></a>
-
-              <a href="mailto:bossbudgetproyect@gmail.com" target="_blank">
-                <button type="button" class="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                  <span class="sr-only">Ir al repositorio correo de Boss Budget</span>
-                    <img src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png"
-                      alt="Gmail Logo" class="w-14 h-14 rounded-full">
-                  </button></a>
-
-                  
-
-
-                    <!-- Menú desplegable, mostrar/ocultar según el estado del menú. Aqui se explica el uso de Tailwind CSS para las animaciones del Menu despegable en español para entenderlo un poco mejor
-                     Ingresando: "duración de la salida lenta de transición-100"
-                      Desde: "transformar opacidad-0 escala-95"
-                       Hasta: "transformar opacidad-100 escala-100" 
-                     Salida: "transición lenta-duración de entrada-75"
-                      Desde: "transformar opacidad-100 escala-100"
-                       Para: "transformar opacidad-0 escala-95" -->
-                  </div>
+              <!--NavBar contenido-->
+            </div>
+            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div class="flex shrink-0 items-center">
+                <img class="h-14 w-14 rounded-full transition-transform duration-500 hover:scale-150" src="img/Logo.png" alt="Logo"> <!--Logo del proyecto-->
+              </div>
+              <div class="hidden sm:ml-6 sm:block">
+                <div class="flex space-x-4">
+                  <!--Enlaces en la  Navbar -->
+                  <a href="index.html" class="rounded-md bg-gray-900 px-4 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500" aria-current="page">Inicio</a>
+                  <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
+                  <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
+                  <a href="SemestreIV.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V </a>
                 </div>
               </div>
             </div>
-          
-            <div class="sm:hidden" id="mobile-menu">
-			  <div class="space-y-1 px-2 pt-2 pb-3">
-				  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Inicio</a>
-				  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
-				  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
-				  <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500">Semestre IV</a>
-				  <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V</a>
-				</div>
-			</div>
-          </nav>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-x-8">
+              <a href="https://bossbudgetproyect.github.io/SitioWeb/" class="rounded-full bg-yellow-600 px-5 py-5 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] text-black hover:text-fuchsia-900" aria-current="page">Versión alpha</a>
+            
+<!-- Menú desplegable, mostrar/ocultar según el estado del menú. Aqui se explica el uso de Tailwind CSS para las animaciones del Menu despegable en español para entenderlo un poco mejor
+                 Ingresando: "duración de la salida lenta de transición-100"
+                  Desde: "transformar opacidad-0 escala-95"
+                   Hasta: "transformar opacidad-100 escala-100" 
+                 Salida: "transición lenta-duración de entrada-75"
+                  Desde: "transformar opacidad-100 escala-100"
+                   Para: "transformar opacidad-0 escala-95" -->
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Menú móvil, mostrar/ocultar según el estado del menú. -->
+        <div class="sm:hidden" id="mobile-menu">
+          <div class="space-y-1 px-2 pt-2 pb-3">
+            <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white  hover:text-yellow-500" aria-current="page">Inicio</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
+            <a href="SemestreIV.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre IV</a>
+          </div>
+        </div>
+      </nav>
     </header>
     
 	<!-- Sección de Introducción Principal -->
-	<section class="bg-white py-16 px-4">
+	<section class="bg-white py-20 px-4">
 	  <div class="max-w-6xl mx-auto text-center">
-		<h1 class="text-4xl sm:text-5xl font-bold text-fuchsia-700 mb-6 font-['Bebas_Neue']">
+		<h1 class="text-4xl sm:text-5xl font-bold text-yellow-600 mb-6 font-['Bebas_Neue']">
 		  ¡Bienvenidos a nuestro Portafolio del Cuarto Semestre!
 		</h1>
 		<p class="text-lg sm:text-xl text-gray-700 font-['Roboto'] mb-10">
@@ -343,49 +313,43 @@
 
 
 <!-- Footer Mejorado -->
-<footer class="bg-gray-900 text-white relative" style="background-image: url('/img/Footer.png'); background-size: cover; background-position: center;">
-  <div class="max-w-7xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-
+<footer class="bg- text-white py-10">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
       <!-- Información del Proyecto -->
-      <div class="text-center md:text-left space-y-3">
-        <h2 class="text-4xl font-['Bebas_Neue'] font-bold text-fuchsia-600">Boss Budget</h2>
-        <p class="text-lg text-gray-300 font-['Bebas_Neue']">
-          Optimiza tus finanzas con nuestra plataforma intuitiva.
+      <div class="text-center">
+        <h2 class="text-3xl sm:text-4xl font-['Bebas_Neue'] font-bold text-fuchsia-700">Boss Budget</h2>
+        <p class="mt-4 text-black text-lg sm:text-xl font-['Bebas_Neue'] font-bold text-black">
+            Optimiza tus finanzas con nuestra plataforma intuitiva.
         </p>
-      </div>
-
-      <!-- Navegación -->
-      <div class="text-center md:text-left">
-        <h3 class="text-2xl font-bold font-['Bebas_Neue'] text-yellow-400 mb-3">Enlaces Rápidos</h3>
-        <ul class="space-y-2 font-['Bebas_Neue'] text-lg">
-          <li><a href="#" class="text-gray-300 hover:text-white transition">Inicio</a></li>
-          <li><a href="#" class="text-gray-300 hover:text-white transition">Documentación</a></li>
-          <li><a href="#" class="text-gray-300 hover:text-white transition">Acerca de</a></li>
-          <li><a href="#" class="text-gray-300 hover:text-white transition">Contacto</a></li>
-        </ul>
-      </div>
-
-      <!-- Redes Sociales -->
-      <div class="text-center md:text-left">
-        <h3 class="text-2xl font-bold font-['Bebas_Neue'] text-cyan-400 mb-3">Síguenos</h3>
-        <div class="flex justify-center md:justify-start space-x-4">
-          <a href="#" class="hover:scale-110 transition duration-200">
-            <img class="w-7 h-7" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-          </a>
-          <a href="#" class="hover:scale-110 transition duration-200">
-            <img class="w-7 h-7" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-          </a>
-          <a href="#" class="hover:scale-110 transition duration-200">
-            <img class="w-7 h-7" src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="YouTube">
-          </a>
-        </div>
-      </div>
     </div>
 
-    <!-- Línea inferior -->
-    <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm font-['Bebas_Neue'] text-gray-400">
-      © 2025 <span class="text-fuchsia-500">Boss Budget</span>. Todos los derechos reservados.
+      <!-- Redes Sociales -->
+      <div>
+        <h3 class="text-lg font-['Bebas_Neue'] text-yellow-700">Contáctate y conoce más de Boss Budget</h3>
+        <div class="flex space-x-4 mt-2">
+          <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
+            <img class="w-25 h-20" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+          </a>
+          
+
+          <a href="https://github.com/BossBudgetProyect" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']" PORTAFOLIO>
+            <img class="w-20 h-20" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+          </a>
+
+          <a href="mailto:bossbudgetproyect@gmail.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
+            <img class="w-25 h-20" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
+          </a>
+          
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Copyright -->
+    <div class="border-t border-black mt-6 pt-4 text-center font-['Bebas_Neue'] font-bold text-sm text-yellow-700">
+      © 2025 Boss Budget. Todos los derechos reservados.
     </div>
   </div>
 </footer>
