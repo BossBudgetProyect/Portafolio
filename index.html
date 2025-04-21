@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Budget Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Yatra+One&display=swap" rel="stylesheet">
+    <!-- Favicon-->
+    <link rel="icon" href="/img/LogoRedondo.png" type="image/png">
+
+    
+</head>
+
+<body>
+    <header>
+      <nav class="bg-fuchsia-700 fixed top-0 w-full z-50 py-2 px-4">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+              <div class="relative flex h-16 items-center justify-between">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  <!-- Botón Movil-->
+                  <button type="button" id="menu-toggle" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
+                    <!-- Icono de menú aquí (por ejemplo, un ícono de hamburguesa) -->
+                    <span class="sr-only">Abrir menú</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                  </button>
+
+                  <!--NavBar contenido-->
+                </div>
+                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                  <div class="flex shrink-0 items-center">
+                    <img class="h-14 w-14 rounded-full transition-transform duration-500 hover:scale-150" src="img/Logo.png" alt="Logo"> <!--Logo del proyecto-->
+                  </div>
+                  <div class="hidden sm:ml-6 sm:block">
+                    <div class="flex space-x-4">
+                      <!--Enlaces en la  Navbar -->
+                      <a href="index.html" class="rounded-md bg-gray-900 px-4 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500" aria-current="page">Inicio</a>
+                      <a href="SemestreI_II.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
+                      <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
+                      <a href="SemestreIV.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre V </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-x-8">
+                  <a href="https://bossbudgetproyect.github.io/SitioWeb/" class="rounded-full bg-yellow-600 px-5 py-5 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] text-black hover:text-fuchsia-900" aria-current="page">Versión alpha</a>
+                
+  <!-- Menú desplegable, mostrar/ocultar según el estado del menú. Aqui se explica el uso de Tailwind CSS para las animaciones del Menu despegable en español para entenderlo un poco mejor
+                     Ingresando: "duración de la salida lenta de transición-100"
+                      Desde: "transformar opacidad-0 escala-95"
+                       Hasta: "transformar opacidad-100 escala-100" 
+                     Salida: "transición lenta-duración de entrada-75"
+                      Desde: "transformar opacidad-100 escala-100"
+                       Para: "transformar opacidad-0 escala-95" -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Menú móvil, mostrar/ocultar según el estado del menú. -->
+            <div class="sm:hidden" id="mobile-menu">
+              <div class="space-y-1 px-2 pt-2 pb-3">
+                <a href="index.html" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white  hover:text-yellow-500" aria-current="page">Inicio</a>
+                <a href="SemestreI_II.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
+                <a href="#" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
+                <a href="SemestreIV.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre IV</a>
+              </div>
+            </div>
+          </nav>
+    </header>
+    
+    <div class="container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center gap-8 sm:py-40">
+        
+
+        <!-- Contenido de la izquierda-->
+      <div class="w-full lg:w-1/2 text-center lg:text-right">
+        <br>
+          <h1 class="text-4xl md:text-4xl text-center font-['Bebas_Neue'] font-bold">¿Qué se busca con Boss Budget?</h1>        
+          <p class="text-3x1 text-center text-gray-600 mt-4 font-['Bebas_Neue']">Boss Budget es una aplicación móvil y web en desarrollo, diseñada para funcionar en distintos dispositivos electrónicos. 
+            Su objetivo es mejorar los hábitos financieros de sus usuarios, ofreciendo múltiples funcionalidades que la convierten en una herramienta intuitiva y fácil de usar.</p>
+      </div>
+      <!-- Video con animación -->
+      <div class="w-full lg:w-1/2 flex justify-center">
+        <div class="relative w-[400px] h-[250px]">  <!-- Aumenté el ancho y reduje la altura -->
+          <iframe 
+              class="w-full h-full rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105"
+              src="https://www.youtube.com/embed/Li7bQG6bBko?si=p-TY-01mPLVBLDku"
+              title="Boss Budget speech"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+          </iframe>
+      </div>
+      
+      
+    </div>
+    
+    
+
+      <!-- Contenido de la derecha -->
+      <div class="bg-white w-full lg:w-1/2 text-center lg:text-left">
+        <br>
+          <h2 class="text-3xl  md:text-6xl text-center font-['Bebas_Neue'] font-bold">Objetivo General</h2>
+          <p class="text-center text-gray-500 mt-2 font-['Bebas_Neue']">Implementar herramientas para la gestión de finanzas mediante una app móvil, lo cual controlará gastos personales, 
+            familiares y sociales.</p>
+      </div>
+    </div>
+    <!--equipo de trabajo-->
+    <div class="bg-gray-200  py-20 sm:py-30">
+      <div class="mx-auto grid max-w-7xl gap-20 px-6 lg:px-8 xl:grid-cols-3">
+        <div class="max-w-xl">
+          <h2 class="text-3xl font-['Bebas_Neue'] font-bold text-black tracking-tight text-pretty text-gray-900 sm:text-4xl">Equipo de desarollo</h2>
+          <p class="mt-6 text-lg/8 text-gray-600 font-['Bebas_Neue'] font-bold ">Somos un grupo dinámico de personas apasionadas por lo que hacemos y dedicadas a ofrecer los mejores resultados a para el desarrollo de éste proyecto</p>
+        </div>
+        <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+          <li>
+
+            <!--Brayan-->
+            <div class="flex items-center gap-x-6">
+              <img class="size-16 rounded-full transition-transform duration-500 hover:scale-150" src="https://wl-genial.cf.tsp.li/resize/728x/webp/732/075/bae30c5c9284ba24ade836ae3e.png.webp" alt="Foto peril Product Owner">
+              <div>
+                <h3 class="text-base/7 font-['Bebas_Neue'] font-bold text-black tracking-tight text-gray-900">Brayan Steven Lopéz</h3>
+                <p class="text-sm/6 font-semibold text-yellow-700">Product Owner</p>
+              </div>
+            </div>
+          </li>
+
+            <!--Andrés-->
+          <li>
+            <div class="flex items-center gap-x-6">
+              <img class="size-16 rounded-full transition-transform duration-500 hover:scale-150" src="https://lippycorn.com/wp-content/uploads/2019/12/8772d4216cdbca41869d54c4f341b7a0.jpg" alt="Foto de peril Back-end">
+              <div>
+                <h3 class="text-base/7 font-['Bebas_Neue'] font-bold tracking-tight text-gray-900">Jorge Andrés Ballen Ramirez</h3>
+                <p class="text-sm/6 font-semibold text-yellow-700">Desarollador Back-End</p>
+              </div>
+            </div>
+          </li>
+
+            <!--Dayana-->
+            <li>
+            <div class="flex items-center gap-x-6">
+              <img class="size-16 rounded-full transition-transform duration-500 hover:scale-150" src="https://i.pinimg.com/736x/91/d4/5b/91d45b23c7f2fec07c3363ebdc2e09e5.jpg" alt="Foto de peril Database Engineer">
+              <div>
+                <h3 class="text-base/7 font-['Bebas_Neue'] font-bold  tracking-tight text-gray-900">Dayana Andrea Escobar</h3>
+                <p class="text-sm/6 font-semibold text-yellow-700">Database</p>
+              </div>
+            </div>
+          </li>
+
+          <!--Alejandro-->
+          <li>
+            <div class="flex items-center gap-x-6">
+              <img class="size-16 rounded-full transition-transform duration-500 hover:scale-150" src="https://1.bp.blogspot.com/-_Q4WpwBXPfE/TjPPGcMdNcI/AAAAAAAAAtg/wCcxEsfFmA4/s640/15.jpg" alt="Foto de peril Database Engineer">
+              <div>
+                <h3 class="text-base/7 font-['Bebas_Neue'] font-bold  tracking-tight text-gray-900">David Alejandro Jáuregui Merchán</h3>
+                <p class="text-sm/6 font-semibold text-yellow-700">Scrum Máster, Desarrollador Front-end</p>
+              </div>
+            </div>
+          </li>
+    
+          
+        </ul>
+      </div>
+    </div>
+
+      <!--Footer-->
+
+    <footer class="bg- text-white py-10">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Información del Proyecto -->
+          <div class="text-center">
+            <h2 class="text-3xl sm:text-4xl font-['Bebas_Neue'] font-bold text-fuchsia-700">Boss Budget</h2>
+            <p class="mt-4 text-black text-lg sm:text-xl font-['Bebas_Neue'] font-bold text-black">
+                Optimiza tus finanzas con nuestra plataforma intuitiva.
+            </p>
+        </div>
+    
+          <!-- Redes Sociales -->
+          <div>
+            <h3 class="text-lg font-['Bebas_Neue'] text-yellow-700">Contáctate y conoce más de Boss Budget</h3>
+            <div class="flex space-x-4 mt-2">
+              <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
+                <img class="w-25 h-20" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+              </a>
+              
+
+              <a href="https://github.com/BossBudgetProyect" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']" PORTAFOLIO>
+                <img class="w-20 h-20" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+              </a>
+
+              <a href="mailto:bossbudgetproyect@gmail.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
+                <img class="w-25 h-20" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
+              </a>
+              
+            </div>
+          </div>
+          
+        </div>
+    
+        <!-- Copyright -->
+        <div class="border-t border-black mt-6 pt-4 text-center font-['Bebas_Neue'] font-bold text-sm text-yellow-700">
+          © 2025 Boss Budget. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+    
+</body>
+
+
+<!-- menu despegable-->
+<script>
+  // Obtener los elementos del botón y el menú móvil
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Agregar un evento para alternar la visibilidad del menú
+  menuToggle.addEventListener('click', () => {
+    // Cambiar la clase de 'hidden' para mostrar u ocultar el menú
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
