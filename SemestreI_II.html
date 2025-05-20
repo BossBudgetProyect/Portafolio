@@ -215,40 +215,70 @@
     </section>
     <!--Seccion de graficas-->
     <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-yellow-500 mb-4 text-center">Graficas tomadas del resultado de la encuesta</h2>
-    <section class="w-full bg-white pt-4 pb-16 px-8">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
-            <!-- imagen a la izquierda -->
-            <div class="md:flex-[1.1] flex flex-col items-center">
-                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">¿Qué motivó impide aplicar recurrentemente un debido hábito para el manejo del presupuesto personal y/o familiar?</h3>
-                <img src="img/Grafica1.png" alt="Primer Grafica" class="w-[680px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            </div>
-            <!-- Texto a la derecha -->
-            <div class="md:flex-[0.9]">
-                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Preguntas cerradas</h3>
-                <p class="text-lg text-gray-700 text-center">
-                    A partir de las preguntas cerradas se sacaron los siguientes resultados:
-                    De la interrogante “Actualmente usted ¿Utiliza alguna herramienta para llevar el manejo de su presupuesto?” resalta que:
-                    El 71% de los encuestados (34)  responde no utilizar, y el 29% (14) restante utiliza diferentes métodos de los cuales destaca el uso de tablas de excel. 
-                    Y de la interrogante “Partiendo de su experiencia o necesidad ¿Qué factores son importantes para que una aplicación web, móvil o alguna herramienta tecnológica deba implementar para ayudar a su control de gastos o corregir alguna herramienta existente?” resalta que:
-                    La gran mayoría de encuestados buscan una herramienta que tenga una interfaz sencilla, donde los datos y resultados se reflejen gráficamente, que el usuario no requiera tener grandes conocimientos financieros para manejar la herramienta, igualmente que al ser intuitiva maneje ciertos tips y sugerencias para poder aportar a el usuario una mejora educativa financieramente, logrando llevar unas finanzas inteligentes.
-                </p>
-            </div>
+<section class="w-full bg-white pt-4 pb-16 px-8">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-10">
+
+    <!-- Izquierda: título arriba + imagen abajo -->
+    <div class="md:flex-[1.1] flex flex-col items-center">
+      <!-- Título dinámico arriba -->
+      <h3 id="slide-title" class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center w-[680px]">
+        ¿Qué motivó impide aplicar recurrentemente un debido hábito para el manejo del presupuesto personal y/o familiar?
+      </h3>
+
+      <!-- Carrusel imagen -->
+      <div class="relative w-[680px] h-[520px] flex-shrink-0">
+        <!-- Slides -->
+        <div class="carousel-image absolute inset-0 transition-opacity duration-500 opacity-100">
+          <img src="img/Grafica1.png" alt="Grafica 1" class="w-full h-full object-contain rounded-lg shadow-lg" />
         </div>
-    </section>
-    <section class="w-full bg-white pt-4 pb-16 px-8">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
-            <!-- imagen a la izquierda -->
-            <div class="md:w-1/2 flex flex-col items-center">
-                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Si tuviera que llevar un control de su presupuesto, a través de una aplicación móvil, ¿Cuáles de estas características le gustaría tener a su servicio</h3>
-                <img src="img/Grafica2.png" alt="Segunda Grafica" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            </div>
-            <!-- imagen a la derecha -->
-            <div class="md:w-1/2 flex flex-col items-center">
-                <h3 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Poniéndose en situación en la cuál una persona le pide la ayuda para controlar su vida económica y encontrar una estabilidad para mejorar su calidad de vida ¿Qué método le aconsejaría?</h3>
-                <img src="img/Grafica3.png" alt="Tercer Grafica" class="w-[620px] h-[520px] rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-            </div>
+        <div class="carousel-image absolute inset-0 transition-opacity duration-500 opacity-0">
+          <img src="img/Grafica2.png" alt="Grafica 2" class="w-full h-full object-contain rounded-lg shadow-lg" />
         </div>
-    </section>
+        <div class="carousel-image absolute inset-0 transition-opacity duration-500 opacity-0">
+          <img src="img/Grafica3.png" alt="Grafica 3" class="w-full h-full object-contain rounded-lg shadow-lg" />
+        </div>
+
+        <!-- Botones -->
+          <button onclick="prevSlide()" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/70 text-fuchsia-700 p-2 rounded-full shadow hover:bg-white transition z-20">
+            ◀
+          </button>
+          <button onclick="nextSlide()" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/70 text-fuchsia-700 p-2 rounded-full shadow hover:bg-white transition z-20">
+            ▶
+          </button>
+
+
+      </div>
+    </div>
+
+    <!-- Derecha: texto en cuadro blanco, alineado más abajo -->
+    <div class="md:flex-[0.7] mt-16 md:mt-0 bg-white rounded-2xl shadow-xl border border-gray-200 p-10 flex flex-col justify-center">
+      <h3 class="text-3xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-6 text-center md:text-left">
+        Preguntas cerradas
+      </h3>
+      <p class="text-base text-gray-700 leading-relaxed text-center md:text-left">
+        A partir de las preguntas cerradas se sacaron los siguientes resultados:
+        De la interrogante “Actualmente usted ¿Utiliza alguna herramienta para llevar el manejo de su presupuesto?” resalta que:
+        El 71% de los encuestados (34) responde no utilizar, y el 29% (14) restante utiliza diferentes métodos de los cuales destaca el uso de tablas de excel.
+        Y de la interrogante “Partiendo de su experiencia o necesidad ¿Qué factores son importantes para que una aplicación web, móvil o alguna herramienta tecnológica deba implementar para ayudar a su control de gastos o corregir alguna herramienta existente?” resalta que:
+        La gran mayoría de encuestados buscan una herramienta que tenga una interfaz sencilla, donde los datos y resultados se reflejen gráficamente, que el usuario no requiera tener grandes conocimientos financieros para manejar la herramienta, igualmente que al ser intuitiva maneje ciertos tips y sugerencias para poder aportar a el usuario una mejora educativa financieramente, logrando llevar unas finanzas inteligentes.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+<!-- JS externo -->
+<script src="animaciones.js/carruselencuesta.js"></script>
+
+
+
+
+
     <!--Adicionales-->
     <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-yellow-500 mb-4 text-center">Adicionales</h2>
     <section class="w-full bg-white pt-4 pb-16 px-8">
