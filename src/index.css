@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Yatra+One&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animate-typing {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.border-r-animate {
+    border-right: 2px solid red;
+}
