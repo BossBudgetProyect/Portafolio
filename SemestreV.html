@@ -65,10 +65,43 @@
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.3);
         }
+        /* Estilos para el Loader */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8fafc; /* bg-gray-50 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Asegura que esté por encima de todo */
+            transition: opacity 0.5s ease;
+        }
+        .loader-icon {
+            width: 100px;
+            height: 100px;
+            animation: spin 0.7s linear infinite; /* Animación de giro */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden-loader {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 
 <body class="bg-gray-200 flex flex-col min-h-screen">
+    <div id="loader-wrapper">
+        <div class="flex flex-col items-center">
+            <img src="img/LogoRedondo.png" alt="Cargando Boss Budget" class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
+            <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
+        </div>
+    </div>
     
     <nav class="fixed top-0 w-full z-50 shadow-lg">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -318,6 +351,16 @@
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
+        });
+        // 🔑 Lógica para ocultar el Loader una vez que la página ha cargado
+        window.addEventListener('load', function() {
+            const loaderWrapper = document.getElementById('loader-wrapper');
+            // Oculta el loader
+            setTimeout(() => {
+                if (loaderWrapper) {
+                    loaderWrapper.classList.add('hidden-loader');
+                }
+            }, 50);
         });
     </script>
 </body>

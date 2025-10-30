@@ -30,7 +30,7 @@
         }
         
         .glass-effect {
-            background: rgba(255, 255, 255, 0.15); /* Slightly less transparency for better readability */
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
@@ -59,14 +59,47 @@
             background: transparent;
         }
         
-        
+        /* Estilos para el Loader */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8fafc; /* bg-gray-50 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Asegura que esté por encima de todo */
+            transition: opacity 0.5s ease;
+        }
+        .loader-icon {
+            width: 100px;
+            height: 100px;
+            animation: spin 0.7s linear infinite; /* Animación de giro */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden-loader {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 
 <body class="bg-gray-200 flex flex-col min-h-screen">
     
+    <div id="loader-wrapper">
+        <div class="flex flex-col items-center">
+            <img src="img/LogoRedondo.png" alt="Cargando Boss Budget" class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
+            <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
+        </div>
+    </div>
     <nav class="fixed top-0 w-full z-50 shadow-lg">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            
             <div class="flex h-20 items-center justify-between">
                 
                 <div class="flex items-center space-x-3">
@@ -138,7 +171,7 @@
 
             <section class="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-20 items-center">
                 <div class="flex-1 w-full card-hover">
-                      <video 
+                    <video 
                         class="w-[480px] h-[550px] rounded-3xl shadow-2xl ring-4 ring-yellow-400 object-cover"
                         controls>
                         <source src="imagenes/Video Boss.mp4" type="video/mp4">
@@ -148,12 +181,12 @@
                 <div class="flex-1 w-full glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
                     <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Objetivos Específicos</h2>
                     <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
-                        <li>Diseñar diagramas de clases correspondiente a la aplicación.</li>
-                        <li>Realizar la conexión de la base de datos con el lenguaje de programación seleccionado.</li>
-                        <li>Aplicar la metodología Scrum en el proyecto haciendo uso de herramientas como Jira.</li>
-                        <li>Diseñar el CRUD correspondiente a la base de datos de la aplicación.</li>
-                        <li>Definir los requerimientos funcionales y no funcionale de la aplicación.</li>
-                        <li>Actualizar los mockups y diseñar el logo definitivo.</li>
+                        <li>Diseñar **diagramas de clases** correspondiente a la aplicación.</li>
+                        <li>Realizar la **conexión de la base de datos** con el lenguaje de programación seleccionado.</li>
+                        <li>Aplicar la **metodología Scrum** en el proyecto haciendo uso de herramientas como Jira.</li>
+                        <li>Diseñar el **CRUD** correspondiente a la base de datos de la aplicación.</li>
+                        <li>Definir los **requerimientos funcionales y no funcionales** de la aplicación.</li>
+                        <li>Actualizar los **mockups** y diseñar el **logo definitivo**.</li>
                     </ul>
                 </div>
             </section>
@@ -165,14 +198,14 @@
                 <div class="flex-1 glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
                     <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Perspectiva del Producto</h2>
                     <p class="text-justify text-black text-lg leading-relaxed">
-                        La aplicación Boss Budget será un producto diseñado 
-                        específicamente para dispositivos móviles, tanto en plataformas iOS y Android,
-                         siendo esto fundamental gracias a la accesibilidad que brinda a los usuarios. 
-                         De esta manera podrían gestionar y registrar sus finanzas de manera rápida y eficaz 
-                         en cualquier momento y lugar. El diseño debe ser óptimo e intuitivo para garantizar 
-                         una experiencia fluida al usuario.
+                        La aplicación **Boss Budget** será un producto diseñado 
+                        específicamente para **dispositivos móviles** (iOS y Android),
+                        siendo esto fundamental gracias a la **accesibilidad** que brinda a los usuarios. 
+                        De esta manera podrían gestionar y registrar sus finanzas de manera rápida y eficaz 
+                        en cualquier momento y lugar. El diseño debe ser **óptimo e intuitivo** para garantizar 
+                        una experiencia fluida al usuario.
                         <br><br>
-                        Como concepto innovador, si el usuario lo permite, la aplicación integrará funciones como la lectura automática de notificaciones de mensajes de texto (por ejemplo, pagos realizados vía Nequi) para registrar transacciones automáticamente, optimizando el seguimiento financiero.
+                        Como concepto innovador, si el usuario lo permite, la aplicación integrará funciones como la **lectura automática de notificaciones de mensajes de texto** (por ejemplo, pagos realizados vía Nequi) para registrar transacciones automáticamente, optimizando el seguimiento financiero.
                     </p>
                 </div>
                 
@@ -388,6 +421,18 @@
             indexMockup = (indexMockup + dir + totalMockup) % totalMockup;
             slidesMockup.style.transform = `translateX(-${indexMockup * 100}%)`;
         }
+        
+        // 🔑 Lógica para ocultar el Loader una vez que la página ha cargado
+        window.addEventListener('load', function() {
+            const loaderWrapper = document.getElementById('loader-wrapper');
+            // Oculta el loader
+            setTimeout(() => {
+                if (loaderWrapper) {
+                    loaderWrapper.classList.add('hidden-loader');
+                }
+            }, 50);
+        });
+        
     </script>
 </body>
 </html>
