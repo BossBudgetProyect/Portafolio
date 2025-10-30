@@ -3,282 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Budget Web</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Boss Budget Web - Semestre III</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/animaciones.js/menuDesplegable.js"></script> <!--Menu desplegable hamburguesa-->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Yatra+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="icon" href="/img/LogoRedondo.png" type="image/png">
     
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .bebas {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15); /* Slightly less transparency for better readability */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        nav {
+            backdrop-filter: blur(10px);
+            background: transparent;
+        }
+        
+        
+    </style>
 </head>
 
-
-<body class="bg-gray-100 text-gray-800">
-  <!-- Header -->
-  <header>
-    <nav class="bg-fuchsia-700 fixed top-0 w-full z-50 py-2 px-4">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                <!-- Botón Movil-->
-                    <button type="button" id="menu-toggle" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-                  <!-- Icono de menú aquí (por ejemplo, un ícono de hamburguesa) -->
-                        <span class="sr-only">Abrir menú</span>
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-
-                <!--NavBar contenido-->
-                </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div class="flex shrink-0 items-center">
-                    <img class="h-14 w-14 rounded-full transition-transform duration-500 hover:scale-150" src="img/LogoRedondo.png" alt="Logo Redondo Boss Budget"> <!-- Nuevo logo redondo -->
+<body class="bg-gray-50 flex flex-col min-h-screen">
+    
+    <nav class="fixed top-0 w-full z-50 shadow-lg">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex h-20 items-center justify-between">
+                
+                <div class="flex items-center space-x-3">
+                    <img class="h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300" 
+                        src="img/LogoRedondo.png" alt="Logo">
                 </div>
                 
-                    <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                    <!--Enlaces en la  Navbar -->
-                            <a href="index.html" class="rounded-md bg-gray-900 px-4 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-white hover:text-yellow-500" aria-current="page">Inicio</a>
-                            <a href="SemestreI_II.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
-                            <a href="#" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
-                            <a href="SemestreIV.html" class="rounded-md px-6 py-4 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] font-bold text-black hover:bg-yellow-500 hover:text-black">Semestre IV </a>
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/50 transition-all">Inicio</a>
+                    
+                    <div class="relative group">
+                        <button id="semestres-dropdown-button" class="px-4 py-2 rounded-lg text-black font-semibold flex items-center bg-white/50 hover:bg-yellow-500 transition-all">
+                            Semestres 
+                            <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" 
+                                id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        
+                        <div id="semestres-dropdown-menu" 
+                            class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="semestres-dropdown-button">
+                                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre I-II</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-yellow-500 hover:bg-white/20 transition-colors font-bold" role="menuitem">Semestre III</a>
+                                <a href="SemestreIV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre IV</a>
+                                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-x-8">
-                    <a href="https://bossbudgetproyect.github.io/SitioWeb/" class="rounded-full bg-yellow-600 px-5 py-5 text-sm sm:text-base md:text-lg lg:text-xl font-['Bebas_Neue'] text-black hover:text-fuchsia-900" aria-current="page">Versión alpha</a>
-              
-<!-- Menú desplegable, mostrar/ocultar según el estado del menú. Aqui se explica el uso de Tailwind CSS para las animaciones del Menu despegable en español para entenderlo un poco mejor
-                   Ingresando: "duración de la salida lenta de transición-100"
-                    Desde: "transformar opacidad-0 escala-95"
-                     Hasta: "transformar opacidad-100 escala-100" 
-                   Salida: "transición lenta-duración de entrada-75"
-                    Desde: "transformar opacidad-100 escala-100"
-                     Para: "transformar opacidad-0 escala-95" -->
-                </div>
+                
+                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
+                    class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+                    Versión Alpha
+                </a>
+                
+                <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
-        </div>
-          <!-- Menú móvil, mostrar/ocultar según el estado del menú. -->
-        <div class="sm:hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pt-2 pb-3">
-              
-                <a href="index.html" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white  hover:text-yellow-500" aria-current="page">Inicio</a>
-                <a href="SemestreI_II.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre I-II</a>
-                <a href="semestre_lll.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre III</a>
-                <a href="SemestreIV.html" class="block rounded-md px-3 py-2 text-base font-['Bebas_Neue'] font-bold font-medium text-black hover:bg-yellow-500 hover:text-black">Semestre IV</a>
+            
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/90 rounded-b-lg">
+                <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Inicio</a>
+                <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre I-II</a>
+                <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-yellow-500 font-semibold bg-white/20">Semestre III</a>
+                <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre IV</a>
+                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V </a>
+                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
+                    class="block px-4 py-2 mx-4 mt-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
             </div>
         </div>
     </nav>
-</header>  
-
-  <!-- Main Content -->
-  <div class="max-w-7xl mx-auto p-6">
-
-    <!-- Intro Section -->
-    <section class="text-center mb-10 bg-white-900 pt-40">
-      <h1 class="text-4xl sm:text-5xl font-bold text-black mb-1 font-['Bebas_Neue']">Boss Budget - Semestre III</h1>
-    </section>
     
-      
+    <main class="flex flex-col flex-grow">
+        
+        <section class="pt-32 pb-20 px-6 hero-pattern text-center">
+            <div class="max-w-7xl mx-auto fade-in">
+                <h1 class="text-6xl lg:text-8xl font-bold mb-6 ">
+                    <span class="bebas text-black">SEMESTRE III</span></h1>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Documentación técnica, diagramas y mockups de la fase de diseño del software.
+                </p>
+            </div>
+        </section>
 
-    <!-- Description Section 1 -->
-    <section class="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-20 items-center max-w-3xl mx-auto px-6">
-      <!-- Video -->
-      <div class="flex-1 w-full transform hover:scale-105 transition duration-500 ease-in-out">
-        <video class="w-full h-64 md:h-96 rounded-2xl shadow-2xl ring-4 ring-white" controls>
-          <source src="imagenes/Video Boss.mp4" type="video/mp4">
-        </video>
-      </div>
-    
-      <!-- Objetivos -->
-      <div class="flex-1 bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
-        <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-6 text-center">Objetivos Específicos</h2>
-        <ul class="list-disc list-inside space-y-3 text-gray-800 text-base leading-relaxed">
-          <li>Diseñar el diagrama de clases correspondiente a la aplicación.</li>
-          <li>Realizar la conexión de la base de datos con el lenguaje de programación seleccionado.</li>
-          <li>Aplicar la metodología Scrum en el proyecto haciendo uso de herramientas como Jira.</li>
-          <li>Diseñar el CRUD correspondiente a la base de datos de la aplicación.</li>
-          <li>Definir los requerimientos funcionales y no funcionales de la aplicación.</li>
-          <li>Actualizar los mockups y diseñar el logo definitivo.</li>
-        </ul>
-      </div>
-    </section>
-    
+        <div class="max-w-7xl mx-auto p-6 flex-grow">
 
-    <!-- Description Section 2 -->
-    <section class="flex flex-col lg:flex-row gap-8 mb-16 items-center">
-      <div class="flex-1">
-        <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-fuchsia-700 mb-4 text-center">Perspectiva del producto</h2>
-        <p class="text-justify">
-          La aplicación Boss-Budget será un producto diseñado específicamente para dispositivos móviles, tanto en plataformas iOS y Android, siendo esto fundamental gracias a la accesibilidad que brinda a los usuarios. De esta manera podrían gestionar y registrar sus finanzas de manera rápida y eficaz en cualquier momento y lugar. El diseño debe ser óptimo e intuitivo para garantizar una experiencia fluida al usuario.
-          <br><br>
-          Como concepto innovador, si el usuario lo permite, la aplicación integrará funciones como la lectura automática de notificaciones de mensajes de texto (por ejemplo, pagos realizados vía Nequi) para registrar transacciones automáticamente, optimizando el seguimiento financiero.
-        </p>
-      </div>
-      <div class="flex-1">
-        <iframe class="w-full h-[600px] rounded-lg shadow-lg" src="Doc/Boss-Budget-Formato-IEEE.pdf"></iframe>
+            <section class="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-20 items-center">
+                <div class="flex-1 w-full card-hover">
+                    <video class="w-full h-64 md:h-96 rounded-2xl shadow-2xl ring-4 ring-yellow-400 object-cover" controls>
+                        <source src="imagenes/Video Boss.mp4" type="video/mp4">
+                    </video>
+                </div>
+            
+                <div class="flex-1 w-full glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
+                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Objetivos Específicos</h2>
+                    <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
+                        <li>Diseñar diagramas de clases correspondiente a la aplicación.</li>
+                        <li>Realizar la conexión de la base de datos con el lenguaje de programación seleccionado.</li>
+                        <li>Aplicar la metodología Scrum en el proyecto haciendo uso de herramientas como Jira.</li>
+                        <li>Diseñar el CRUD correspondiente a la base de datos de la aplicación.</li>
+                        <li>Definir los requerimientos funcionales y no funcionale de la aplicación.</li>
+                        <li>Actualizar los mockups y diseñar el logo definitivo.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <hr class="my-12 border-t-2 border-gray-200">
 
-      </div>
-    </section>
+            <section class="flex flex-col lg:flex-row gap-8 mb-16 items-center">
+                
+                <div class="flex-1 glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
+                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Perspectiva del Producto</h2>
+                    <p class="text-justify text-white text-lg leading-relaxed">
+                        La aplicación **Boss-Budget** será un producto diseñado específicamente para dispositivos móviles, tanto en plataformas **iOS y Android**, siendo esto fundamental gracias a la accesibilidad que brinda a los usuarios. De esta manera podrían gestionar y registrar sus finanzas de manera rápida y eficaz en cualquier momento y lugar. El diseño debe ser óptimo e intuitivo para garantizar una experiencia fluida al usuario.
+                        <br><br>
+                        Como concepto innovador, si el usuario lo permite, la aplicación integrará funciones como la **lectura automática de notificaciones de mensajes de texto** (por ejemplo, pagos realizados vía Nequi) para registrar transacciones automáticamente, optimizando el seguimiento financiero.
+                    </p>
+                </div>
+                
+                <div class="flex-1 card-hover">
+                    <iframe class="w-full h-[600px] rounded-2xl shadow-2xl border-4 border-yellow-400" src="Doc/Boss-Budget-Formato-IEEE.pdf"></iframe>
+                </div>
+            </section>
 
-    <!-- Carrusel Diagramas UML -->
-    <section class="bg-gray-200 mb-16">
-        <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel">
-          <div class="text-center mb-6">
-            <h2 class="text-4xl sm:text-5xl font-bold text-yellow-600 mb-1 font-['Bebas_Neue']">Diagramas UML</h2>
-          </div>
-      
-          <!-- Slides -->
-          <div class="flex transition-transform duration-500" id="slides">
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Diagrama de casos de uso</h3>
-              <img src="Diagramas/DiagramaCasosUso.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Diagrama de estado - Objeto Ingresos</h3>
-              <img src="Diagramas/Diagrrama de estado.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Diagrama actividades - Registrarse</h3>
-              <img src="Diagramas/Diagrama registrarse.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Diagrama actividades - Creación presupuesto</h3>
-              <img src="Diagramas/CasoCreacioPresupuesto.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Diagrama actividades - Reportes usuario</h3>
-              <img src="Diagramas/CasoReporteUsuario.jpg" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Diagrama actividades - Pago de Suscripción</h3>
-              <img src="Diagramas/CasoPagoSuscripcion.jpg" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-          </div>
-      
- 
-      
-      <script>
-        let index = 0;
-        const slides = document.getElementById("slides");
-        const total = slides.children.length;
-      
-        function cambiarSlide(dir) {
-          index = (index + dir + total) % total;
-          slides.style.transform = `translateX(-${index * 100}%)`;
-        }
-      </script>
-      
-    
-    <!-- Carrusel Mockups -->
-    <section class="bg-gray-200 mb-16">
-        <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-mockups">
-          <div class="text-center mb-6">
-            <h2 class="text-4xl sm:text-5xl font-bold text-yellow-600 mb-1 font-['Bebas_Neue']">Mockups</h2>
-          </div>
-      
-          <!-- Slides -->
-          <div class="flex transition-transform duration-500" id="slides-mockups">
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Ingresar Usuario Nuevo</h3>
-              <img src="Mockups/Mockup1.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Menú Principal</h3>
-              <img src="Mockups/Mockup2.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Perfil de Usuario</h3>
-              <img src="Mockups/Mockup3.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Registro de Ingresos</h3>
-              <img src="Mockups/Mockup4.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Visualización de Gastos</h3>
-              <img src="Mockups/Mockup5.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Registro de Créditos</h3>
-              <img src="Mockups/Mockup6.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Generación de Reportes Financieros</h3>
-              <img src="Mockups/Mockup7.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-            <div class="min-w-full text-center">
-              <h3 class="font-semibold mb-4 text-2xl">Generación de Recordatorios</h3>
-              <img src="Mockups/Mockup8.png" class="mx-auto w-[900px] h-[500px] object-contain rounded shadow" />
-            </div>
-          </div>
-      
-          <!-- Botones navegación -->
-          <button onclick="cambiarSlideMockup(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 bg-fuchsia-700 text-white p-3 rounded-full shadow hover:bg-fuchsia-800">
-            ❮
-          </button>
-          <button onclick="cambiarSlideMockup(1)" class="absolute right-4 top-[55%] -translate-y-1/2 bg-fuchsia-700 text-white p-3 rounded-full shadow hover:bg-fuchsia-800">
-            ❯
-          </button>
+            <hr class="my-12 border-t-2 border-gray-200">
+
+            <section class="bg-purple-100 p-8 rounded-3xl shadow-2xl mb-16">
+                <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-diagramas">
+                    <div class="text-center mb-10">
+                        <h2 class="text-5xl lg:text-6xl font-bold bebas gradient-text">Diagramas UML</h2>
+                    </div>
+                
+                    <div class="flex transition-transform duration-500" id="slides-diagramas">
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama de casos de uso</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Diagramas/DiagramaCasosUso.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Casos de Uso" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama de estado - Objeto Ingresos</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Diagramas/Diagrrama de estado.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Estado" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Registrarse</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Diagramas/Diagrama registrarse.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Registrarse" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Creación presupuesto</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Diagramas/CasoCreacioPresupuesto.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Creación de Presupuesto" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Reportes usuario</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Diagramas/CasoReporteUsuario.jpg" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Reportes de Usuario" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Pago de Suscripción</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Diagramas/CasoPagoSuscripcion.jpg" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Pago de Suscripción" />
+                            </div>
+                        </div>
+                    </div>
+                
+                    <button onclick="cambiarSlideDiagramas(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                        ❮
+                    </button>
+                    <button onclick="cambiarSlideDiagramas(1)" class="absolute right-4 top-[55%] -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                        ❯
+                    </button>
+                </div>
+            </section>
+            
+            <hr class="my-12 border-t-2 border-gray-200">
+
+            <section class="bg-yellow-50 p-8 rounded-3xl shadow-2xl mb-16">
+                <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-mockups">
+                    <div class="text-center mb-10">
+                        <h2 class="text-5xl lg:text-6xl font-bold bebas text-purple-700">Mockups</h2>
+                    </div>
+                
+                    <div class="flex transition-transform duration-500" id="slides-mockups">
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Ingresar Usuario Nuevo</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup1.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Ingresar Usuario Nuevo" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Menú Principal</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup2.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Menú Principal" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Perfil de Usuario</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup3.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Perfil de Usuario" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Registro de Ingresos</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup4.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Registro de Ingresos" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Visualización de Gastos</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup5.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Visualización de Gastos" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Registro de Créditos</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup6.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Registro de Créditos" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Generación de Reportes Financieros</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup7.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Generación de Reportes" />
+                            </div>
+                        </div>
+                        <div class="min-w-full text-center p-4">
+                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Generación de Recordatorios</h3>
+                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                                <img src="Mockups/Mockup8.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Generación de Recordatorios" />
+                            </div>
+                        </div>
+                    </div>
+                
+                    <button onclick="cambiarSlideMockup(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                        ❮
+                    </button>
+                    <button onclick="cambiarSlideMockup(1)" class="absolute right-4 top-[55%] -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                        ❯
+                    </button>
+                </div>
+            </section>
         </div>
-      </section>
-      
-      <script>
+    </main>
+
+    <footer class="bg-transparent py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 mb-8">
+                <div>
+                    <h2 class="text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
+                        Boss Budget
+                    </h2>
+                    <p class="text-gray-600 text-lg">
+                        Optimiza tus finanzas con nuestra plataforma intuitiva.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" 
+                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                            aria-label="Canal de YouTube">
+                            <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                        </a>
+                        <a href="https://github.com/BossBudgetProyect" 
+                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                            aria-label="Repositorio de Github">
+                            <img class="w-10 h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+                        </a>
+                        <a href="mailto:bossbudgetproyect@gmail.com" 
+                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors"
+                            aria-label="Enviar correo a Gmail">
+                            <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-600">
+                © 2025 Boss Budget. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Lógica para el menú desplegable (escritorio)
+        document.getElementById('semestres-dropdown-button').addEventListener('click', function() {
+            const menu = document.getElementById('semestres-dropdown-menu');
+            const arrow = document.getElementById('dropdown-arrow');
+            const isHidden = menu.classList.contains('hidden');
+            
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                menu.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        });
+
+        // Lógica para el menú móvil (hamburguesa)
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Lógica para el Carrusel de Diagramas UML
+        let indexDiagramas = 0;
+        const slidesDiagramas = document.getElementById("slides-diagramas");
+        const totalDiagramas = slidesDiagramas.children.length;
+        
+        function cambiarSlideDiagramas(dir) {
+            indexDiagramas = (indexDiagramas + dir + totalDiagramas) % totalDiagramas;
+            slidesDiagramas.style.transform = `translateX(-${indexDiagramas * 100}%)`;
+        }
+        
+        // Lógica para el Carrusel de Mockups
         let indexMockup = 0;
         const slidesMockup = document.getElementById("slides-mockups");
         const totalMockup = slidesMockup.children.length;
-      
+        
         function cambiarSlideMockup(dir) {
-          indexMockup = (indexMockup + dir + totalMockup) % totalMockup;
-          slidesMockup.style.transform = `translateX(-${indexMockup * 100}%)`;
+            indexMockup = (indexMockup + dir + totalMockup) % totalMockup;
+            slidesMockup.style.transform = `translateX(-${indexMockup * 100}%)`;
         }
-      </script>
-      
-      
-
-      <!--Footer-->
-
-      <footer class="bg- text-white py-10">
-        <div class="max-w-6xl mx-auto px-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- Información del Proyecto -->
-            <div class="text-center">
-              <h2 class="text-3xl sm:text-4xl font-['Bebas_Neue'] font-bold text-fuchsia-700">Boss Budget</h2>
-              <p class="mt-4 text-black text-lg sm:text-xl font-['Bebas_Neue'] font-bold text-black">
-                  Optimiza tus finanzas con nuestra plataforma intuitiva.
-              </p>
-          </div>
-      
-            <!-- Redes Sociales -->
-            <div>
-              <h3 class="text-lg font-['Bebas_Neue'] text-yellow-700">Contáctate y conoce más de Boss Budget</h3>
-              <div class="flex space-x-4 mt-2">
-                <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
-                  <img class="w-25 h-20" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
-                </a>
-                
-  
-                <a href="https://github.com/BossBudgetProyect" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']" PORTAFOLIO>
-                  <img class="w-20 h-20" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
-                </a>
-  
-                <a href="mailto:bossbudgetproyect@gmail.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:font-['Bebas_Neue']">
-                  <img class="w-25 h-20" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
-                </a>
-                
-              </div>
-            </div>
-            
-          </div>
-      
-          <!-- Copyright -->
-          <div class="border-t border-black mt-6 pt-4 text-center font-['Bebas_Neue'] font-bold text-sm text-yellow-700">
-            © 2025 Boss Budget. Todos los derechos reservados.
-          </div>
-        </div>
-      </footer>
+    </script>
 </body>
 </html>
