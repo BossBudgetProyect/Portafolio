@@ -1,509 +1,513 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Budget Web - Semestre I-II</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="img/BossBudget/LogoRedondo.png" type="image/png">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .bebas {
-            font-family: 'Bebas Neue', sans-serif;
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        nav {
-            backdrop-filter: blur(10px);
-            background: transparent;
-        }
-        
-        
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boss Budget Web - Semestre I-II</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="img/BossBudget/LogoRedondo.png" type="image/png" />
 
-        /* Clases para el toggle de texto */
-        .text-truncated {
-            max-height: 140px; /* La altura inicial de la clase tailwind max-h-[140px] */
-            overflow: hidden;
-        }
-        .text-expanded {
-            max-height: none;
-        }
-        /* Estilos para el Loader */
-        #loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8fafc; /* bg-gray-50 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999; /* Asegura que esté por encima de todo */
-            transition: opacity 0.5s ease;
-        }
-        .loader-icon {
-            width: 100px;
-            height: 100px;
-            animation: spin 0.7s linear infinite; /* Animación de giro */
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .hidden-loader {
-            opacity: 0;
-            visibility: hidden;
-        }
-    </style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
+
+    * { font-family: 'Inter', sans-serif; }
+
+    .bebas { font-family: 'Bebas Neue', sans-serif; }
+
+    .glass-effect {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .fade-in { animation: fadeIn 0.8s ease-in; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    nav { backdrop-filter: blur(10px); background: transparent; }
+
+    /* Clases para el toggle de texto */
+    .text-truncated { max-height: 140px; overflow: hidden; }
+    .text-expanded { max-height: none; }
+
+    /* Loader */
+    #loader-wrapper {
+      position: fixed; top:0; left:0; width:100%; height:100%;
+      background-color: #f8fafc; display:flex; justify-content:center; align-items:center;
+      z-index:9999; transition: opacity 0.5s ease;
+    }
+    .loader-icon { width:100px; height:100px; animation: spin 0.7s linear infinite; }
+    @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
+    .hidden-loader { opacity:0; visibility:hidden; pointer-events:none; }
+  </style>
 </head>
 
 <body class="bg-gray-200 flex flex-col min-h-screen">
-    <div id="loader-wrapper">
-        <div class="flex flex-col items-center">
-            <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget" class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
-            <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
-        </div>
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div class="flex flex-col items-center">
+      <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget"
+           class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl" />
+      <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
     </div>
-    <nav class="fixed top-0 w-full z-50 shadow-lg">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-20 items-center justify-between">
-                
-                <div class="flex items-center space-x-3">
-                    <img class="h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300" 
-                        src="img/BossBudget/LogoRedondo.png" alt="Logo">
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold hover:bg-purple-700 transition-all">Inicio</a>
-                    
-                    <div class="relative group">
-                        <button id="semestres-dropdown-button" class="px-4 py-2 rounded-lg text-black font-semibold flex items-center bg-white/50 hover:bg-yellow-500 transition-all">
-                            Semestres 
-                            <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" 
-                                id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                        
-                        <div id="semestres-dropdown-menu" 
-                            class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
-                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="semestres-dropdown-button">
-                                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-yellow-500 hover:bg-white/20 transition-colors font-bold" role="menuitem">Semestre I-II</a>
-                                <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre III</a>
-                                <a href="SemestreIV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre IV</a>
-                                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                    class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
-                    Versión Alpha
-                </a>
-                
-                <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/90 rounded-b-lg">
-                <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Inicio</a>
-                <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-yellow-500 font-semibold bg-white/20">Semestre I-II</a>
-                <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre III</a>
-                <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre IV</a>
-                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V </a>
-                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                    class="block px-4 py-2 mx-4 mt-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
-            </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 shadow-lg">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-20 items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img class="h-10 w-10 sm:h-12 sm:w-12 rounded-full hover:scale-110 transition-transform duration-300"
+               src="img/BossBudget/LogoRedondo.png" alt="Logo" />
         </div>
-    </nav>
 
-    <main class="flex flex-col flex-grow">
-        <section class="pt-32 pb-20 px-6 hero-pattern text-center">
-            <div class="max-w-7xl mx-auto fade-in">
-                <h1 class="text-6xl lg:text-4x2 font-bold mb-6 leading-tight">
-                    <span class="gradient-text bebas"> SEMESTRE I-II</span>
-                </h1>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    Desarrollo del proyecto Boss Budget durante el semestre I y semestre II</p>
-                    <p class="text-xl text-gray-700 max-w-3xl mx-auto"></pclass>(2023 II-2024 I)
-                </p>
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold hover:bg-purple-700 transition-all">Inicio</a>
+
+          <div class="relative">
+            <button id="semestres-dropdown-button"
+                    class="px-4 py-2 rounded-lg text-black font-semibold flex items-center bg-white/50 hover:bg-yellow-500 transition-all">
+              Semestres
+              <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" id="dropdown-arrow"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div id="semestres-dropdown-menu"
+                 class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-yellow-500 hover:bg-white/20 transition-colors font-bold">Semestre I-II</a>
+                <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre III</a>
+                <a href="SemestreIV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre IV</a>
+                <a href="SemestreV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre V</a>
+              </div>
             </div>
-        </section>
-
-        <div class="max-w-7xl mx-auto p-6 flex-grow">
-
-            <section class="grid lg:grid-cols-2 gap-12 mb-20 items-center">
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Planteamiento del problema</h2>
-                    <p class="text-justify text-black text-lg leading-relaxed">
-                        ¿Cómo instruir a las personas al adecuado manejo del presupuesto a través de una aplicación móvil/multiplataforma que cumpla con las necesidades de cada usuario y mejore su calidad de vida mediante herramientas financieras?
-                    </p>
-                </div>
-                <div class="card-hover">
-                    <img src="img/Documentacion/FichaExperimento.png" alt="Ficha de Experimento" class="w-full h-auto max-h-[570px] object-contain rounded-2xl shadow-2xl ring-4 ring-yellow-400">
-                </div>
-            </section>
-            
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="grid lg:grid-cols-2 gap-12 mb-20 items-center">
-                <div class="card-hover">
-                    <iframe src="Doc/Boss-Budget.pdf#zoom=60" class="w-full h-[620px] rounded-2xl shadow-2xl border-4 border-yellow-400"></iframe>
-                </div>
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Objetivos Específicos</h2>
-                    <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
-                        <li>Diseñar un modelo estadístico que me permita recolectar los datos para identificar los usos financieros y las falencias.</li>
-                        <li>Desarrollar una encuesta que permita el análisis de los datos de nuestra estadística en el uso de aplicaciones financieras.</li>
-                        <li>Diseñar el maquetado de la aplicación.</li>
-                        <li>Aplicar triple restricción al proyecto.</li>
-                        <li>Diseñar hipótesis a través de nuestro método de recolección de datos.</li>
-                        <li>Aplicación de la matriz de riesgos.</li>
-                        <li>Definir un gestor de base de datos para nuestro proyecto.</li>
-                        <li>Aplicar el modelo entidad relación a nuestro proyecto.</li>
-                        <li>Definir el lenguaje de programación más óptimo que vamos a utilizar.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="grid lg:grid-cols-2 gap-12 mb-20 items-center">
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Introducción</h2>
-                    
-                    <p id="introTexto" class="text-justify text-black text-lg leading-relaxed text-truncated transition-all duration-500 ease-in-out">
-                        Las finanzas personales en nuestro entorno son consideradas como algo transitorio, por lo cual se aborda de manera superficial y no se le da la importancia necesaria. Esto como consecuencia lleva a las personas a tener una negativa administración de sus ingresos, conduciendo a secuelas como tener que solicitar préstamos constantes, trabajar solo para subsistir, no poder ahorrar y no cumplir metas financieras. Esto en el presente no es solo una falencia sino que es perjudicial para sobrellevar la situación financiera del país y del mundo, ya que no se es consciente de la importancia de mejorar los hábitos financieros y el impacto positivo que puede ocasionar en la vida cotidiana de cada persona.
-                        A dónde se quiere llegar, es a poder ofrecer a las personas una opción factible para mejorar su situación financiera, logrando un control financiero de manera ordenada y completa. En este contexto exploramos las necesidades presentadas por las personas y se buscará que a partir de una serie de herramientas se pueda encontrar una solución a corto, mediano o largo plazo dependiendo de las secuelas evidenciadas.
-                        En este escrito se expondrá el proceso de desarrollo de una app móvil que cubra las necesidades extraídas de una recopilación de datos que tomaremos de encuestas dirigidas a todas aquellas personas interesadas en manejar su presupuesto de manera digital, de estos datos se busca agrupar los hábitos perjudiciales más repetitivos entre estas. A partir de esto la app será capaz de brindar herramientas como mostrar de manera cronológica un presupuesto tanto presente como futuro, registrar ingresos y egresos tanto fijos como variables, debitar pagos automáticamente por medio de notificaciones, brindar tips para el mejoramiento de hábitos financieros, personalizar su perfil y manejar diferentes categorías de ingreso de datos dependiendo del usuario.
-                    </p>
-                    
-                    <button id="btnToggleIntro" class="gradient-text font-bold mt-4 block mx-auto hover:scale-105 transition-transform" onclick="toggleIntro()">Mostrar más</button>
-                </div>
-                <div class="card-hover">
-                    <img src="img/BossBudget/LogoRedondo.png" alt="Imagen Budget" class="w-full h-auto max-h-[520px] object-contain rounded-3xl shadow-2xl">
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="grid lg:grid-cols-2 gap-12 mb-20 items-center">
-                <div class="card-hover">
-                    <img src="img/Documentacion/MapaEmpatia.png" alt="Mapa de empatía" class="w-full h-auto max-h-[520px] object-contain rounded-2xl shadow-2xl ring-4 ring-yellow-400">
-                </div>
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Metodología</h2>
-                    <p class="text-justify text-black text-lg leading-relaxed">
-                        El objetivo de la presente investigación será la recolección de información clara y completa de las personas a través de una serie de encuestas que tendrán como finalidad conocer sus hábitos financieros, sus experiencias y opiniones frente a herramientas financieras completas y en el caso de estar interesadas en una nueva herramienta de este nivel, cuál sería la funcionalidad que destacaría frente a las ya existentes.
-                    </p>
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="grid lg:grid-cols-2 gap-12 mb-20 items-center">
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Encuesta analítica online con retrospectiva</h2>
-                    <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
-                        <li>Es una encuesta que analiza información adquirida según preguntas cortas y concretas de formato abierto y cerrado referente a la experiencia del encuestado de manera online.</li>
-                        <li>La realización de la encuesta será a través de la plataforma Microsoft Forms, haciendo uso de un correo personal por cada usuario que participe en la misma.</li>
-                    </ul> 
-                </div>
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover flex flex-col items-center justify-center space-y-8">
-                    <div class="text-center">
-                        <h3 class="text-3xl font-bold bebas text-black mb-4">Encuesta online</h3>
-                        <a href="https://forms.office.com/r/4Bnr00V7KH" target="_blank"
-                            class="inline-block px-8 py-4 bg-yellow-400 text-purple-900 font-bold rounded-full shadow-lg hover:scale-105 transition-all">
-                            Ingrese a la encuesta
-                        </a>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-3xl font-bold bebas text-green-400 mb-4">Resultados de Encuesta de seguimiento presupuestal</h3>
-                        <a href="https://forms.office.com/Pages/AnalysisPage.aspx?AnalyzerToken=8lk4spmxeGsIByi0wmnZxkSeST1p4b5s&id=iISfkzSdDEemwIz1m5QbtvvFYtrViWtJkVpkPeo0-fFUNk9PSU9HMTBYSVMwSjJRNEFPRkM1TzIxSC4u" target="_blank"
-                            class="inline-block px-8 py-4 bg-yellow-400 text-purple-900 font-bold rounded-full shadow-lg hover:scale-105 transition-all">
-                            Respuestas de la encuesta
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="bg-purple-300 p-8 rounded-3xl shadow-2xl mb-16">
-                <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-encuesta">
-                    <div class="text-center mb-10">
-                        <h2 class="text-5xl lg:text-6xl font-bold bebas gradient-text">Gráficas de la encuesta</h2>
-                    </div>
-                
-                    <div class="flex transition-transform duration-500" id="slides-encuesta">
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">¿Qué motivó impide aplicar recurrentemente un debido hábito para el manejo del presupuesto personal y/o familiar?</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/GraficaEncuesta/Grafica1.png" class="mx-auto w-full h-full object-contain rounded" alt="Grafica 1" />
-                            </div>
-                        </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">¿Qué motivó impide aplicar recurrentemente un debido hábito para el manejo del presupuesto personal y/o familiar? (Continuación)</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/GraficaEncuesta/Grafica2.png" class="mx-auto w-full h-full object-contain rounded" alt="Grafica 2" />
-                            </div>
-                        </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">¿Qué motivó impide aplicar recurrentemente un debido hábito para el manejo del presupuesto personal y/o familiar? (Conclusión)</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/GraficaEncuesta/Grafica3.png" class="mx-auto w-full h-full object-contain rounded" alt="Grafica 3" />
-                            </div>
-                        </div>
-                    </div>
-                
-                    <button onclick="cambiarSlideEncuesta(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
-                        ❮
-                    </button>
-                    <button onclick="cambiarSlideEncuesta(1)" class="absolute right-4 top-[55%] -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
-                        ❯
-                    </button>
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-            
-            <section class="mb-20">
-                <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h3 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">
-                        Resultados de Preguntas Cerradas
-                    </h3>
-                    <p class="text-justify text-black text-lg leading-relaxed">
-                        A partir de las preguntas cerradas se sacaron los siguientes resultados:
-                        De la interrogante “Actualmente usted ¿Utiliza alguna herramienta para llevar el manejo de su presupuesto?” resalta que:
-                        El 71% de los encuestados (34) responde no utilizar, y el 29% (14) restante utiliza diferentes métodos de los cuales destaca el uso de tablas de excel.
-                        Y de la interrogante “Partiendo de su experiencia o necesidad ¿Qué factores son importantes para que una aplicación web, móvil o alguna herramienta tecnológica deba implementar para ayudar a su control de gastos o corregir alguna herramienta existente?” resalta que:
-                        La gran mayoría de encuestados buscan una herramienta que tenga una interfaz sencilla, donde los datos y resultados se reflejen gráficamente, que el usuario no requiera tener grandes conocimientos financieros para manejar la herramienta, igualmente que al ser intuitiva maneje ciertos tips y sugerencias para poder aportar a el usuario una mejora educativa financieramente, logrando llevar unas finanzas inteligentes.
-                    </p>
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="bg-yellow-100 p-8 rounded-3xl shadow-2xl mb-16">
-                <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-adicionales">
-                    <div class="text-center mb-10">
-                        <h2 class="text-5xl lg:text-6xl font-bold bebas text-purple-700">Adicionales</h2>
-                    </div>
-                
-                    <div class="flex transition-transform duration-500" id="slides-adicionales">
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Triple Restricción</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/Documentacion/TripleRestriccion.png" class="mx-auto w-full h-full object-contain rounded" alt="Triple Restricción" />
-                            </div>
-                        </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Matriz de Riesgos</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/Documentacion/MatrizRiesgos.png" class="mx-auto w-full h-full object-contain rounded" alt="Matriz de Riesgos" />
-                            </div>
-                        </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Aplicación de Metodología (Kanban)</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/Documentacion/TableroKanban.png" class="mx-auto w-full h-full object-contain rounded" alt="Tablero Kanban" />
-                            </div>
-                        </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Mapa de la Propuesta</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/Documentacion/MapaPropuesta.png" class="mx-auto w-full h-full object-contain rounded" alt="Mapa de la Propuesta" />
-                            </div>
-                        </div>
-                    </div>
-                
-                    <button onclick="cambiarSlideAdicionales(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
-                        ❮
-                    </button>
-                    <button onclick="cambiarSlideAdicionales(1)" class="absolute right-4 top-[55%] -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
-                        ❯
-                    </button>
-                </div>
-            </section>
+          </div>
         </div>
-    </main>
-        <nav aria-label="Page navigation" class="flex justify-center mt-12">
+
+        <a href="https://bossbudgetproyect.github.io/SitioWeb/"
+           class="hidden md:block px-5 py-2 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+          Versión Alpha
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/90 rounded-b-lg mt-2">
+        <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Inicio</a>
+        <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-yellow-500 font-semibold bg-white/20">Semestre I-II</a>
+        <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre III</a>
+        <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre IV</a>
+        <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V</a>
+        <a href="https://bossbudgetproyect.github.io/SitioWeb/"
+           class="block px-4 py-2 mx-4 mt-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex flex-col flex-grow">
+    <!-- Hero -->
+    <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 hero-pattern text-center">
+      <div class="max-w-7xl mx-auto fade-in">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+          <span class="gradient-text bebas">SEMESTRE I-II</span>
+        </h1>
+        <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+          Desarrollo del proyecto Boss Budget durante el semestre I y semestre II (2023 II - 2024 I)
+        </p>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
+      <!-- Sección: Planteamiento y imagen -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-center">
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover">
+          <h2 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4 text-center">Planteamiento del problema</h2>
+          <p class="text-justify text-black text-base sm:text-lg leading-relaxed">
+            ¿Cómo instruir a las personas al adecuado manejo del presupuesto a través de una aplicación móvil/multiplataforma que cumpla con las necesidades de cada usuario y mejore su calidad de vida mediante herramientas financieras?
+          </p>
+        </div>
+
+        <div class="card-hover">
+          <img src="img/Documentacion/FichaExperimento.png" alt="Ficha de Experimento"
+               class="w-full h-auto max-h-[520px] object-contain rounded-2xl shadow-2xl ring-4 ring-yellow-400" />
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Sección: PDF + objetivos -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-start">
+        <div class="card-hover">
+          <!-- PDF responsive: aspecto controlado por contenedor con ratio -->
+          <div class="w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-yellow-400">
+            <div class="w-full aspect-[4/3] md:aspect-[16/9]">
+              <iframe src="Doc/Boss-Budget.pdf#zoom=60" class="w-full h-full" title="Documento Boss Budget"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover">
+          <h2 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4 text-center">Objetivos Específicos</h2>
+          <ul class="list-disc list-inside space-y-2 text-black text-base sm:text-lg leading-relaxed">
+            <li>Diseñar un modelo estadístico que me permita recolectar los datos para identificar los usos financieros y las falencias.</li>
+            <li>Desarrollar una encuesta que permita el análisis de los datos de nuestra estadística en el uso de aplicaciones financieras.</li>
+            <li>Diseñar el maquetado de la aplicación.</li>
+            <li>Aplicar triple restricción al proyecto.</li>
+            <li>Diseñar hipótesis a través de nuestro método de recolección de datos.</li>
+            <li>Aplicación de la matriz de riesgos.</li>
+            <li>Definir un gestor de base de datos para nuestro proyecto.</li>
+            <li>Aplicar el modelo entidad relación a nuestro proyecto.</li>
+            <li>Definir el lenguaje de programación más óptimo que vamos a utilizar.</li>
+          </ul>
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Introducción con botón Mostrar más -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-center">
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover">
+          <h2 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4 text-center">Introducción</h2>
+
+          <p id="introTexto" class="text-justify text-black text-base sm:text-lg leading-relaxed text-truncated transition-all duration-500 ease-in-out">
+            Las finanzas personales en nuestro entorno son consideradas como algo transitorio, por lo cual se aborda de manera superficial y no se le da la importancia necesaria. Esto como consecuencia lleva a las personas a tener una negativa administración de sus ingresos, conduciendo a secuelas como tener que solicitar préstamos constantes, trabajar solo para subsistir, no poder ahorrar y no cumplir metas financieras. Esto en el presente no es solo una falencia sino que es perjudicial para sobrellevar la situación financiera del país y del mundo, ya que no se es consciente de la importancia de mejorar los hábitos financieros y el impacto positivo que puede ocasionar en la vida cotidiana de cada persona.
+            A dónde se quiere llegar, es a poder ofrecer a las personas una opción factible para mejorar su situación financiera, logrando un control financiero de manera ordenada y completa. En este contexto exploramos las necesidades presentadas por las personas y se buscará que a partir de una serie de herramientas se pueda encontrar una solución a corto, mediano o largo plazo dependiendo de las secuelas evidenciadas.
+            En este escrito se expondrá el proceso de desarrollo de una app móvil que cubra las necesidades extraídas de una recopilación de datos que tomaremos de encuestas dirigidas a todas aquellas personas interesadas en manejar su presupuesto de manera digital, de estos datos se busca agrupar los hábitos perjudiciales más repetitivos entre estas. A partir de esto la app será capaz de brindar herramientas como mostrar de manera cronológica un presupuesto tanto presente como futuro, registrar ingresos y egresos tanto fijos como variables, debitar pagos automáticamente por medio de notificaciones, brindar tips para el mejoramiento de hábitos financieros, personalizar su perfil y manejar diferentes categorías de ingreso de datos dependiendo del usuario.
+          </p>
+
+          <div class="mt-4 text-center">
+            <button id="btnToggleIntro" class="gradient-text font-bold hover:scale-105 transition-transform" onclick="toggleIntro()">Mostrar más</button>
+          </div>
+        </div>
+
+        <div class="card-hover flex items-center justify-center">
+          <img src="img/BossBudget/LogoRedondo.png" alt="Imagen Budget"
+               class="w-full max-w-[420px] h-auto object-contain rounded-3xl shadow-2xl" />
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Metodología y Mapa empatía -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-center">
+        <div class="card-hover flex items-center justify-center">
+          <img src="img/Documentacion/MapaEmpatia.png" alt="Mapa de empatía"
+               class="w-full h-auto max-h-[520px] object-contain rounded-2xl shadow-2xl ring-4 ring-yellow-400" />
+        </div>
+
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover">
+          <h2 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4 text-center">Metodología</h2>
+          <p class="text-justify text-black text-base sm:text-lg leading-relaxed">
+            El objetivo de la presente investigación será la recolección de información clara y completa de las personas a través de una serie de encuestas que tendrán como finalidad conocer sus hábitos financieros, sus experiencias y opiniones frente a herramientas financieras completas y en el caso de estar interesadas en una nueva herramienta de este nivel, cuál sería la funcionalidad que destacaría frente a las ya existentes.
+          </p>
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Encuesta analítica y botones -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-start">
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover">
+          <h2 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4 text-center">Encuesta analítica online con retrospectiva</h2>
+          <ul class="list-disc list-inside space-y-2 text-black text-base sm:text-lg leading-relaxed">
+            <li>Es una encuesta que analiza información adquirida según preguntas cortas y concretas de formato abierto y cerrado referente a la experiencia del encuestado de manera online.</li>
+            <li>La realización de la encuesta será a través de la plataforma Microsoft Forms, haciendo uso de un correo personal por cada usuario que participe en la misma.</li>
+          </ul>
+        </div>
+
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover flex flex-col items-center justify-center space-y-6">
+          <div class="text-center">
+            <h3 class="text-xl sm:text-2xl font-bold bebas text-black mb-4">Encuesta online</h3>
+            <a href="https://forms.office.com/r/4Bnr00V7KH" target="_blank"
+               class="inline-block px-6 py-3 sm:px-8 sm:py-4 bg-yellow-400 text-purple-900 font-bold rounded-full shadow-lg hover:scale-105 transition-all">
+              Ingrese a la encuesta
+            </a>
+          </div>
+
+          <div class="text-center">
+            <h3 class="text-xl sm:text-2xl font-bold bebas text-green-400 mb-4">Resultados de Encuesta de seguimiento presupuestal</h3>
+            <a href="https://forms.office.com/Pages/AnalysisPage.aspx?AnalyzerToken=8lk4spmxeGsIByi0wmnZxkSeST1p4b5s&id=iISfkzSdDEemwIz1m5QbtvvFYtrViWtJkVpkPeo0-fFUNk9PSU9HMTBYSVMwSjJRNEFPRkM1TzIxSC4u" target="_blank"
+               class="inline-block px-6 py-3 sm:px-8 sm:py-4 bg-yellow-400 text-purple-900 font-bold rounded-full shadow-lg hover:scale-105 transition-all">
+              Respuestas de la encuesta
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Carrusel: Gráficas de la encuesta -->
+      <section class="bg-purple-300 p-6 sm:p-8 rounded-3xl shadow-2xl mb-12">
+        <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-encuesta">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold bebas gradient-text">Gráficas de la encuesta</h2>
+          </div>
+
+          <div class="flex transition-transform duration-500" id="slides-encuesta" style="width:100%;">
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-purple-900">¿Qué motivó impide aplicar ...?</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/GraficaEncuesta/Grafica1.png" class="mx-auto w-full h-full object-contain rounded" alt="Grafica 1" />
+              </div>
+            </div>
+
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-purple-900">Continuación</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/GraficaEncuesta/Grafica2.png" class="mx-auto w-full h-full object-contain rounded" alt="Grafica 2" />
+              </div>
+            </div>
+
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-purple-900">Conclusión</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/GraficaEncuesta/Grafica3.png" class="mx-auto w-full h-full object-contain rounded" alt="Grafica 3" />
+              </div>
+            </div>
+          </div>
+
+          <button onclick="cambiarSlideEncuesta(-1)"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+            ❮
+          </button>
+          <button onclick="cambiarSlideEncuesta(1)"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+            ❯
+          </button>
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Resultados preguntas cerradas -->
+      <section class="mb-12">
+        <div class="glass-effect p-6 sm:p-8 rounded-2xl shadow-xl card-hover">
+          <h3 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4 text-center">Resultados de Preguntas Cerradas</h3>
+          <p class="text-justify text-black text-base sm:text-lg leading-relaxed">
+            A partir de las preguntas cerradas se sacaron los siguientes resultados: De la interrogante “Actualmente usted ¿Utiliza alguna herramienta para llevar el manejo de su presupuesto?” resalta que: El 71% de los encuestados (34) responde no utilizar, y el 29% (14) restante utiliza diferentes métodos de los cuales destaca el uso de tablas de excel. Y de la interrogante “Partiendo de su experiencia o necesidad ¿Qué factores son importantes para que una aplicación web, móvil o alguna herramienta tecnológica deba implementar para ayudar a su control de gastos o corregir alguna herramienta existente?” resalta que: La gran mayoría de encuestados buscan una herramienta que tenga una interfaz sencilla, donde los datos y resultados se reflejen gráficamente, que el usuario no requiera tener grandes conocimientos financieros para manejar la herramienta, igualmente que al ser intuitiva maneje ciertos tips y sugerencias para poder aportar a el usuario una mejora educativa financieramente, logrando llevar unas finanzas inteligentes.
+          </p>
+        </div>
+      </section>
+
+      <hr class="my-8 border-t-2 border-gray-200" />
+
+      <!-- Carrusel Adicionales -->
+      <section class="bg-yellow-100 p-6 sm:p-8 rounded-3xl shadow-2xl mb-12">
+        <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-adicionales">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold bebas text-purple-700">Adicionales</h2>
+          </div>
+
+          <div class="flex transition-transform duration-500" id="slides-adicionales" style="width:100%;">
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-yellow-700">Triple Restricción</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/Documentacion/TripleRestriccion.png" class="mx-auto w-full h-full object-contain rounded" alt="Triple Restricción" />
+              </div>
+            </div>
+
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-yellow-700">Matriz de Riesgos</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/Documentacion/MatrizRiesgos.png" class="mx-auto w-full h-full object-contain rounded" alt="Matriz de Riesgos" />
+              </div>
+            </div>
+
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-yellow-700">Aplicación de Metodología (Kanban)</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/Documentacion/TableroKanban.png" class="mx-auto w-full h-full object-contain rounded" alt="Tablero Kanban" />
+              </div>
+            </div>
+
+            <div class="min-w-full text-center p-4">
+              <h3 class="font-semibold mb-4 text-lg sm:text-2xl text-yellow-700">Mapa de la Propuesta</h3>
+              <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[45vh] sm:h-[50vh] md:h-[55vh] flex items-center justify-center">
+                <img src="img/Documentacion/MapaPropuesta.png" class="mx-auto w-full h-full object-contain rounded" alt="Mapa de la Propuesta" />
+              </div>
+            </div>
+          </div>
+
+          <button onclick="cambiarSlideAdicionales(-1)"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+            ❮
+          </button>
+          <button onclick="cambiarSlideAdicionales(1)"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+            ❯
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Paginación -->
+  <nav aria-label="Page navigation" class="flex justify-center mt-6 mb-8">
     <ul class="flex items-center -space-x-px h-12 text-lg">
-         <li>
-      <a href="index.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">
-        <span class="sr-only">Previous</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
+      <li>
+        <a href="index.html" class="flex items-center justify-center px-3 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black rounded-full">
+          <span class="sr-only">Previous</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          </svg>
         </a>
-        </li>
-        <li>
-        <a href="index.html"class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">1</a>
-        </li>
-        <li>
-        <a href="SemestreI_II.html" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-black border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black dark:border-purple-700 dark:bg-purple-700 dark:text-black rounded-full">2</a>
-        </li>
-        <li>
-        <a href="semestre_lll.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">3</a>
-        </li>
-        <li>
-        <a href="SemestreIV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">4</a>
-        </li>
-        <li>
-        <a href="SemestreV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">5</a>
-        </li>
-        <li>
-        <a href="semestre_lll.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">
-            <span class="sr-only">Next</span>
-            <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+      </li>
+      <li>
+        <a href="index.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black rounded-full mx-2">1</a>
+      </li>
+      <li>
+        <a href="SemestreI_II.html" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-black border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black rounded-full mx-2">2</a>
+      </li>
+      <li>
+        <a href="semestre_lll.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black rounded-full mx-2">3</a>
+      </li>
+      <li>
+        <a href="SemestreIV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black rounded-full mx-2">4</a>
+      </li>
+      <li>
+        <a href="SemestreV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black rounded-full mx-2">5</a>
+      </li>
+      <li>
+        <a href="semestre_lll.html" class="flex items-center justify-center px-3 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black rounded-full">
+          <span class="sr-only">Next</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
+          </svg>
         </a>
-        </li>
+      </li>
     </ul>
-    </nav>
+  </nav>
 
-    <footer class="bg-transparent py-12 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 mb-8">
-                <div>
-                    <h2 class="text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
-                        Boss Budget
-                    </h2>
-                    <p class="text-gray-600 text-lg">
-                        Optimiza tus finanzas con nuestra plataforma intuitiva.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
-                            aria-label="Canal de YouTube">
-                            <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
-                        </a>
-                        <a href="https://github.com/BossBudgetProyect" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
-                            aria-label="Repositorio de Github">
-                            <img class="w-10 h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
-                        </a>
-                        <a href="mailto:bossbudgetproyect@gmail.com" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors"
-                            aria-label="Enviar correo a Gmail">
-                            <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-600">
-                © 2025 Boss Budget. Todos los derechos reservados.
-            </div>
+  <!-- Footer -->
+  <footer class="bg-transparent py-12 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 mb-8">
+        <div>
+          <h2 class="text-3xl sm:text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
+            Boss Budget
+          </h2>
+          <p class="text-gray-600 text-base sm:text-lg">Optimiza tus finanzas con nuestra plataforma intuitiva.</p>
         </div>
-    </footer>
-    
-    <script>
-        // Lógica para el menú desplegable (escritorio)
-        document.getElementById('semestres-dropdown-button').addEventListener('click', function() {
-            const menu = document.getElementById('semestres-dropdown-menu');
-            const arrow = document.getElementById('dropdown-arrow');
-            const isHidden = menu.classList.contains('hidden');
-            
-            if (isHidden) {
-                menu.classList.remove('hidden');
-                arrow.classList.add('rotate-180');
-            } else {
-                menu.classList.add('hidden');
-                arrow.classList.remove('rotate-180');
-            }
-        });
 
-        // Lógica para el menú móvil (hamburguesa)
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+        <div>
+          <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
+          <div class="flex space-x-4">
+            <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors" aria-label="Canal de YouTube">
+              <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube" />
+            </a>
+            <a href="https://github.com/BossBudgetProyect" class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="Repositorio de Github">
+              <img class="w-10 h-10" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github" />
+            </a>
+            <a href="mailto:bossbudgetproyect@gmail.com" class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors" aria-label="Enviar correo a Gmail">
+              <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail" />
+            </a>
+          </div>
+        </div>
+      </div>
 
-        // Lógica para el botón "Mostrar más" de la introducción
-        function toggleIntro() {
-            const texto = document.getElementById('introTexto');
-            const boton = document.getElementById('btnToggleIntro');
-            
-            if (texto.classList.contains('text-truncated')) {
-                texto.classList.remove('text-truncated');
-                texto.classList.add('text-expanded');
-                boton.textContent = 'Mostrar menos';
-            } else {
-                texto.classList.add('text-truncated');
-                texto.classList.remove('text-expanded');
-                boton.textContent = 'Mostrar más';
-            }
+      <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-600">
+        © 2025 Boss Budget. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Loader hide
+    window.addEventListener('load', () => {
+      const loaderWrapper = document.getElementById('loader-wrapper');
+      setTimeout(() => {
+        if (loaderWrapper) loaderWrapper.classList.add('hidden-loader');
+      }, 200);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    }
+
+    // Dropdown Semestres (escritorio)
+    const dropdownButton = document.getElementById('semestres-dropdown-button');
+    const dropdownMenu = document.getElementById('semestres-dropdown-menu');
+    const dropdownArrow = document.getElementById('dropdown-arrow');
+    if (dropdownButton) {
+      dropdownButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (dropdownMenu) dropdownMenu.classList.toggle('hidden');
+        if (dropdownArrow) dropdownArrow.classList.toggle('rotate-180');
+      });
+      // cerrar al hacer clic fuera
+      document.addEventListener('click', (ev) => {
+        if (dropdownMenu && !dropdownMenu.classList.contains('hidden')) {
+          if (!dropdownButton.contains(ev.target) && !dropdownMenu.contains(ev.target)) {
+            dropdownMenu.classList.add('hidden');
+            if (dropdownArrow) dropdownArrow.classList.remove('rotate-180');
+          }
         }
+      });
+    }
 
-        // Lógica para el Carrusel de Adicionales (Carrusel 2)
-        let indexAdicionales = 0;
-        const slidesAdicionales = document.getElementById("slides-adicionales");
-        const totalAdicionales = slidesAdicionales.children.length;
-        
-        function cambiarSlideAdicionales(dir) {
-            indexAdicionales = (indexAdicionales + dir + totalAdicionales) % totalAdicionales;
-            slidesAdicionales.style.transform = `translateX(-${indexAdicionales * 100}%)`;
-        }
+    // Toggle intro text
+    function toggleIntro() {
+      const texto = document.getElementById('introTexto');
+      const boton = document.getElementById('btnToggleIntro');
+      if (!texto || !boton) return;
+      if (texto.classList.contains('text-truncated')) {
+        texto.classList.remove('text-truncated');
+        texto.classList.add('text-expanded');
+        boton.textContent = 'Mostrar menos';
+      } else {
+        texto.classList.add('text-truncated');
+        texto.classList.remove('text-expanded');
+        boton.textContent = 'Mostrar más';
+      }
+    }
 
-        // Lógica para el Carrusel de Encuestas (Carrusel 1)
-        let indexEncuesta = 0;
-        const slidesEncuesta = document.getElementById("slides-encuesta");
-        const totalEncuesta = slidesEncuesta.children.length;
-        
-        function cambiarSlideEncuesta(dir) {
-            indexEncuesta = (indexEncuesta + dir + totalEncuesta) % totalEncuesta;
-            slidesEncuesta.style.transform = `translateX(-${indexEncuesta * 100}%)`;
-        }
-        // 🔑 Lógica para ocultar el Loader una vez que la página ha cargado
-        window.addEventListener('load', function() {
-            const loaderWrapper = document.getElementById('loader-wrapper');
-            // Oculta el loader
-            setTimeout(() => {
-                if (loaderWrapper) {
-                    loaderWrapper.classList.add('hidden-loader');
-                }
-            }, 50);
-        });
-    </script>
+    // Carrusel Adicionales
+    let indexAdicionales = 0;
+    const slidesAdicionales = document.getElementById("slides-adicionales");
+    const totalAdicionales = slidesAdicionales ? slidesAdicionales.children.length : 0;
+    function cambiarSlideAdicionales(dir) {
+      if (!slidesAdicionales || totalAdicionales === 0) return;
+      indexAdicionales = (indexAdicionales + dir + totalAdicionales) % totalAdicionales;
+      slidesAdicionales.style.transform = `translateX(-${indexAdicionales * 100}%)`;
+    }
+
+    // Carrusel Encuesta
+    let indexEncuesta = 0;
+    const slidesEncuesta = document.getElementById("slides-encuesta");
+    const totalEncuesta = slidesEncuesta ? slidesEncuesta.children.length : 0;
+    function cambiarSlideEncuesta(dir) {
+      if (!slidesEncuesta || totalEncuesta === 0) return;
+      indexEncuesta = (indexEncuesta + dir + totalEncuesta) % totalEncuesta;
+      slidesEncuesta.style.transform = `translateX(-${indexEncuesta * 100}%)`;
+    }
+
+    // Accessibility: permitir navegación por teclado a los botones del carrusel
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') cambiarSlideEncuesta(-1);
+      if (e.key === 'ArrowRight') cambiarSlideEncuesta(1);
+    });
+  </script>
 </body>
 </html>
