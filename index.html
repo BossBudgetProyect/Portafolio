@@ -1,411 +1,261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Budget Web</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="/img/BossBudget/LogoRedondo.png type="image/png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .bebas {
-            font-family: 'Bebas Neue', sans-serif;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        nav {
-            backdrop-filter: blur(10px);
-            background: transparent;
-        }
-        
-        .hero-pattern {
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(192, 159, 28, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.2) 0%, transparent 50%);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boss Budget Web</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="/img/BossBudget/LogoRedondo.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
+    * { font-family: 'Inter', sans-serif; }
 
-        /* Estilos para el Loader */
-        #loader-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8fafc; /* bg-gray-50 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999; /* Asegura que esté por encima de todo */
-            transition: opacity 0.5s ease;
-        }
-        .loader-icon {
-            width: 100px;
-            height: 100px;
-            animation: spin 0.7s linear infinite; /* Animación de giro */
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .hidden-loader {
-            opacity: 0;
-            visibility: hidden;
-        }
-    </style>
+    .bebas { font-family: 'Bebas Neue', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%); }
+    .gradient-text {
+      background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    .floating { animation: floating 3s ease-in-out infinite; }
+    @keyframes floating { 0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)} }
+    .fade-in { animation: fadeIn 0.8s ease-in; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+    nav { backdrop-filter: blur(10px); background: transparent; }
+    
+    #loader-wrapper {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #f8fafc;
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999; transition: opacity 0.5s ease;
+    }
+    .loader-icon {
+      width: 100px; height: 100px; animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
+    .hidden-loader { opacity: 0; visibility: hidden; }
+  </style>
 </head>
 
 <body class="bg-gray-50 flex flex-col min-h-screen">
-    <div id="loader-wrapper">
-        <div class="flex flex-col items-center">
-            <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget" class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
-            <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
-        </div>
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div class="flex flex-col items-center">
+      <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget"
+           class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
+      <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
     </div>
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 shadow-lg">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-20 items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <img class="h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300" 
-                         src="img/BossBudget/Logo.png" alt="Logo">
-                    
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-1">
-    <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold bg-white/50 hover:bg-purple-700 transition-all">Inicio</a>
-    
-    <div class="relative group">
-        <button id="semestres-dropdown-button" class="px-4 py-2 rounded-lg text-black font-semibold flex items-center hover:bg-yellow-500 transition-all">
-            Semestres 
-            <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" 
-                 id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-        </button>
-        
-        <div id="semestres-dropdown-menu" 
-             class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
-            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="semestres-dropdown-button">
-                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre I-II</a>
-                <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre III</a>
-                <a href="SemestreIV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre IV</a>
-                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V </a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 shadow-lg bg-white/50 backdrop-blur-lg">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-20 items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img class="h-10 w-10 sm:h-12 sm:w-12 rounded-full hover:scale-110 transition-transform duration-300" 
+               src="img/BossBudget/Logo.png" alt="Logo">
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold bg-white/50 hover:bg-purple-700 hover:text-white transition-all">Inicio</a>
+          <div class="relative group">
+            <button id="semestres-dropdown-button"
+                    class="px-4 py-2 rounded-lg text-black font-semibold flex items-center hover:bg-yellow-500 transition-all">
+              Semestres
+              <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" id="dropdown-arrow"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div id="semestres-dropdown-menu"
+                 class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre I-II</a>
+                <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre III</a>
+                <a href="SemestreIV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre IV</a>
+                <a href="SemestreV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre V</a>
               </div>
+            </div>
+          </div>
         </div>
+
+        <a href="https://bossbudgetproyect.github.io/SitioWeb/"
+           class="hidden md:block px-5 py-2 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+          Versión Alpha
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+        <a href="index.html" class="block px-4 py-2 rounded-lg text-black font-semibold bg-white/20">Inicio</a>
+        <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre I-II</a>
+        <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre III</a>
+        <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre IV</a>
+        <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre V</a>
+        <a href="https://bossbudgetproyect.github.io/SitioWeb/"
+           class="block px-4 py-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
+      </div>
     </div>
-    </div>
-                
-                <!-- CTA Button -->
-                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                   class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
-                    Versión Alpha
-                </a>
-                
-                <!-- Mobile Menu Button -->
-                <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-white hover:bg-white/20">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
-                <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold bg-white/20">Inicio</a>
-                <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre I-II</a>
-                <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre III</a>
-                <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre IV</a>
-                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V </a>
-                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                   class="block px-4 py-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
-            </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="fade-in text-center lg:text-left">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <span class="bebas text-purple-700">Boss Budget</span>
+        </h1>
+        <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-8">
+          Boss Budget es una aplicación móvil y web en desarrollo, diseñada para funcionar en distintos dispositivos electrónicos. 
+          Su objetivo es mejorar los hábitos financieros de sus usuarios, ofreciendo múltiples funcionalidades que la convierten en 
+          una herramienta intuitiva y fácil de usar.
+        </p>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
+          <div class="flex items-center space-x-2 bg-purple-100 px-4 py-2 rounded-full">
+            <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+            <span class="text-sm font-semibold text-purple-900">Multiplataforma</span>
+          </div>
+          <div class="flex items-center space-x-2 bg-yellow-100 px-4 py-2 rounded-full">
+            <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+            <span class="text-sm font-semibold text-yellow-900">Gestión Inteligente</span>
+          </div>
         </div>
-    </nav>
+      </div>
 
-
-    
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6 hero-pattern">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Text Content -->
-                <div class="fade-in">
-                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                        <span class="bebas text-purple-700">Boss Budget</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 leading-relaxed mb-8">
-                        Boss Budget es una aplicación móvil y web en desarrollo, diseñada para funcionar en distintos dispositivos electrónicos. 
-                        Su objetivo es mejorar los hábitos financieros de sus usuarios, ofreciendo múltiples funcionalidades que la convierten en 
-                        una herramienta intuitiva y fácil de usar.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center space-x-2 bg-purple-100 px-4 py-2 rounded-full">
-                            <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            <span class="text-sm font-semibold text-purple-900">Multiplataforma</span>
-                        </div>
-                        <div class="flex items-center space-x-2 bg-yellow-100 px-4 py-2 rounded-full">
-                            <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-sm font-semibold text-yellow-900">Gestión Inteligente</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Video -->
-                <div class="relative floating">
-                <iframe
-                    class="rounded-2xl shadow-lg"
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/Um0D4eC6luw?si=LQNH36avuNNIA9Xb"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen>
-                </iframe>
-                </div>
-            </div>
-        <br>
-       <!-- NUEVA SECCIÓN: Objetivo y Equipo de Desarrollo -->
-<div class="max-w-7xl mx-auto flex flex-col items-center justify-center gap-10 mt-10">
-
-  <!-- OBJETIVO GENERAL (centrado) -->
-  <div class="w-full md:w-2/1 lg:w-1/2 relative group p-6 rounded-2xl shadow-xl overflow-hidden 
-              bg-blue-50 hover:bg-blue-100 border-4 border-fuchsia-700 
-              hover:border-yellow-500  text-center">
-    
-    <div class="flex items-center justify-between mb-2">
-      <h2 class="text-3xl font-bold font-['Bebas_Neue'] text-purple-700 mx-auto">
-        OBJETIVO GENERAL
-      </h2>
-      
+      <!-- Video -->
+      <div class="relative floating w-full flex justify-center">
+        <div class="w-full aspect-video max-w-xl sm:max-w-2xl lg:max-w-none">
+          <iframe class="rounded-2xl shadow-lg w-full h-full"
+                  src="https://www.youtube.com/embed/Um0D4eC6luw?si=LQNH36avuNNIA9Xb"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="hover-content pt-4">
-      <p class="text-lg text-gray-700 leading-relaxed">
-        Implementar herramientas para la <strong>gestión de finanzas</strong> mediante una aplicación móvil, lo cual controlará gastos personales, familiares y sociales, proveyendo al usuario de una visión clara y detallada de su salud financiera con reportes y alertas inteligentes.
+  <!-- Objetivo General + Equipo -->
+  <div class="max-w-7xl mx-auto flex flex-col items-center justify-center gap-10 px-4 sm:px-6 lg:px-8">
+    <div class="w-full lg:w-3/4 relative group p-6 sm:p-8 rounded-2xl shadow-xl overflow-hidden bg-blue-50 hover:bg-blue-100 border-4 border-fuchsia-700 hover:border-yellow-500 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold bebas text-purple-700 mb-4">OBJETIVO GENERAL</h2>
+      <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+        Implementar herramientas para la <strong>gestión de finanzas</strong> mediante una aplicación móvil, controlando gastos personales, familiares y sociales, proveyendo al usuario de una visión clara de su salud financiera con reportes y alertas inteligentes.
       </p>
       <div class="mt-6 p-4 bg-purple-300 rounded-lg inline-block text-left">
-        <p class="text-md text-blue-800 font-semibold">
-          <span class="font-extrabold mr-2">🎯 Meta:</span> Automatización completa de seguimiento de ingresos y egresos.
+        <p class="text-sm sm:text-md text-blue-800 font-semibold">
+          <span class="font-extrabold mr-2">🎯 Meta:</span> Automatización completa del seguimiento financiero.
         </p>
       </div>
     </div>
+
+    <!-- Equipo -->
+    <a class="flex flex-col md:flex-row items-center md:items-stretch justify-center bg-yellow-400 border border-yellow-200 rounded-2xl shadow-2xl w-full max-w-6xl p-4 sm:p-8 gap-4 md:gap-8 hover:bg-yellow-500 transition-all duration-500">
+      <img class="object-cover w-full md:w-2/5 h-64 sm:h-80 rounded-2xl md:rounded-s-2xl"
+           src="img/BossBudget/EquipoDesarrollo.png" alt="Equipo Boss Budget">
+
+      <div class="p-4 sm:p-8 w-full text-center md:text-left flex flex-col justify-center">
+        <h5 class="mb-6 text-2xl sm:text-4xl font-extrabold text-yellow-700">Equipo de desarrollo</h5>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform">
+            <h4 class="font-bold text-gray-900 text-lg sm:text-xl">Brayan S. Lopez</h4>
+            <p class="text-fuchsia-600 text-sm">Product Owner</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform">
+            <h4 class="font-bold text-gray-900 text-lg sm:text-xl">Jorge A. Ballén</h4>
+            <p class="text-fuchsia-600 text-sm">Desarrollador Back-End</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform">
+            <h4 class="font-bold text-gray-900 text-lg sm:text-xl">Dayana A. Medina</h4>
+            <p class="text-fuchsia-600 text-sm">Desarrolladora BD</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform">
+            <h4 class="font-bold text-gray-900 text-lg sm:text-xl">David A. Jáuregui M.</h4>
+            <p class="text-fuchsia-600 text-sm">Scrum Master / Front-End</p>
+          </div>
+        </div>
+      </div>
+    </a>
   </div>
 
-  <!-- EQUIPO DE DESARROLLO (debajo y centrado) -->
-  <a class="flex flex-col items-center bg-yellow border border-yellow-200 rounded-2xl shadow-2xl 
-md:flex-row md:max-w-[1600px] w-full lg:w-[90%] hover:bg-yellow-700 
-dark:border-yellow-200 dark:bg-yellow-500 dark:hover:bg-yellow-600 transition-all duration-500 justify-center mx-auto p-8">
+  <!-- Footer -->
+  <footer class="bg-transparent text-white py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12 mb-8 text-center md:text-left">
+        <div>
+          <h2 class="text-3xl sm:text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
+            Boss Budget
+          </h2>
+          <p class="text-gray-600 text-base sm:text-lg">
+            Optimiza tus finanzas con nuestra plataforma intuitiva.
+          </p>
+        </div>
 
-  <img class="object-cover w-full rounded-t-2xl h-[500px] md:h-[400px] md:w-[400px] md:rounded-none md:rounded-s-2xl" 
-       src="img/BossBudget/EquipoDesarrollo.png" alt="Equipo Boss Budget">
-
-  <div class="p-10 w-full text-center">
-    <h5 class="mb-6 text-4xl font-extrabold tracking-tight text-yellow-700 dark:text-white">
-      Equipo de desarrollo
-    </h5>
-
-    <div class="grid grid-cols-2 gap-6">
-      <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform duration-300">
-        <h4 class="font-bold text-gray-900 text-xl">Brayan S. Lopez</h4>
-        <p class="text-fuchsia-600 text-sm">Product Owner</p>
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
+          <div class="flex justify-center md:justify-start space-x-5">
+            <a href="https://www.instagram.com/bossbudget/" class="hover:text-yellow-400 text-black transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm4.5-.5a1 1 0 110 2 1 1 0 010-2z"/>
+              </svg>
+            </a>
+            <a href="mailto:bossbudgetproject@gmail.com" class="hover:text-yellow-400 text-black transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 5.01-8-5.01V6h16zM4 18V8.489l8 5.01 8-5.01V18H4z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
-
-      <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform duration-300">
-        <h4 class="font-bold text-gray-900 text-xl">Jorge A. Ballén</h4>
-        <p class="text-fuchsia-600 text-sm">Desarrollador Back-End</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform duration-300">
-        <h4 class="font-bold text-gray-900 text-xl">Dayana A. Medina</h4>
-        <p class="text-fuchsia-600 text-sm">Desarrolladora BD</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:scale-105 transition-transform duration-300">
-        <h4 class="font-bold text-gray-900 text-xl">David A. Jáuregui M.</h4>
-        <p class="text-fuchsia-600 text-sm">Scrum Master / Front-end</p>
+      <div class="text-center border-t border-gray-300 pt-6 text-gray-600 text-sm">
+        © 2025 Boss Budget. Todos los derechos reservados.
       </div>
     </div>
-  </div>
-</a>
+  </footer>
 
+  <script>
+    const loader = document.getElementById("loader-wrapper");
+    window.addEventListener("load", () => setTimeout(() => loader.classList.add("hidden-loader"), 500));
 
- <br><br><br>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
 
-    <nav aria-label="Page navigation" class="flex justify-center mt-12">
-    <ul class="flex items-center -space-x-px h-12 text-lg">
-        </li>
-        <li>
-        <a href="index.html" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-black border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black dark:border-purple-700 dark:bg-purple-700 dark:text-black rounded-full">1</a>
-        </li>
-        <li>
-        <a href="SemestreI_II.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">2</a>
-        </li>
-        <li>
-        <a href="semestre_lll.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">3</a>
-        </li>
-        <li>
-        <a href="SemestreIV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">4</a>
-        </li>
-        <li>
-        <a href="SemestreV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">5</a>
-        </li>
-        <li>
-        <a href="SemestreI_II.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">
-            <span class="sr-only">Next</span>
-            <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-        </a>
-        </li>
-    </ul>
-    </nav>
+    const dropdownButton = document.getElementById("semestres-dropdown-button");
+    const dropdownMenu = document.getElementById("semestres-dropdown-menu");
+    const dropdownArrow = document.getElementById("dropdown-arrow");
 
-    <!-- Footer -->
-    <footer class="bg-transparent text-white py-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 mb-8">
-                <div>
-                    <h2 class="text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
-                        Boss Budget
-                    </h2>
-                    <p class="text-gray-600 text-lg">
-                        Optimiza tus finanzas con nuestra plataforma intuitiva.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" 
-                           class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
-                            <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
-                        </a>
-                        <a href="https://github.com/BossBudgetProyect" 
-                           class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
-                            <img class="w-10 h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
-                        </a>
-                        <a href="mailto:bossbudgetproyect@gmail.com" 
-                           class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors">
-                            <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-600">
-                © 2025 Boss Budget. Todos los derechos reservados.
-            </div>
-        </div>
-    </footer>
-
-    
-
-    <!-- boton desplegable semestres-->
-     <script>
-    // 1. Funcionalidad del Menú Desplegable de Semestres (Desktop)
-    const dropdownButton = document.getElementById('semestres-dropdown-button');
-    const dropdownMenu = document.getElementById('semestres-dropdown-menu');
-    const dropdownArrow = document.getElementById('dropdown-arrow');
-
-    dropdownButton.addEventListener('click', () => {
-        // Alternar la visibilidad
-        const isHidden = dropdownMenu.classList.contains('hidden');
-        if (isHidden) {
-            dropdownMenu.classList.remove('hidden');
-            // Rotar la flecha para indicar que está abierto
-            dropdownArrow.classList.add('rotate-180'); 
-        } else {
-            dropdownMenu.classList.add('hidden');
-            // Devolver la flecha a su posición original
-            dropdownArrow.classList.remove('rotate-180');
-        }
+    dropdownButton.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("hidden");
+      dropdownArrow.classList.toggle("rotate-180");
     });
 
-    // 2. Ocultar el menú desplegable al hacer clic fuera de él
-    document.addEventListener('click', (event) => {
-        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.add('hidden');
-            dropdownArrow.classList.remove('rotate-180');
-        }
+    document.addEventListener("click", (event) => {
+      if (!dropdownButton.contains(event.target)) dropdownMenu.classList.add("hidden");
     });
-
-    // 3. (OPCIONAL) Código existente para el Menú Móvil
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    // 🔑 Lógica para ocultar el Loader una vez que la página ha cargado
-        window.addEventListener('load', function() {
-            const loaderWrapper = document.getElementById('loader-wrapper');
-            // Oculta el loader
-            setTimeout(() => {
-                if (loaderWrapper) {
-                    loaderWrapper.classList.add('hidden-loader');
-                }
-            }, 50);
-        });
-</script>
+  </script>
 </body>
 </html>
