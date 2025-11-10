@@ -64,6 +64,7 @@
                 radial-gradient(circle at 20% 50%, rgba(192, 159, 28, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.2) 0%, transparent 50%);
         }
+        
         /* Estilos para el Loader */
         #loader-wrapper {
             position: fixed;
@@ -91,338 +92,364 @@
             opacity: 0;
             visibility: hidden;
         }
+
+        /* 🔑 CLASE CRÍTICA PARA EL Z-INDEX y RESPONSIVIDAD DEL VIDEO 🔑 */
+        /* Por defecto (escritorio), oculta el video y lo posiciona. */
+        .video-dropdown {
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.3s;
+            pointer-events: none;
+            visibility: hidden;
+            /* z-index ALTO para que esté sobre otros textos */
+            z-index: 20; 
+            transform: translateY(10px); /* Leve efecto de entrada */
+        }
+
+        /* Mostrar en hover (escritorio) */
+        .group:hover .video-dropdown {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Habilitar la visibilidad del video desplegable en pantallas pequeñas sin hover (responsive-friendly) */
+        @media (max-width: 767px) {
+            .video-dropdown {
+                position: static !important; /* Quitar absolute para que fluya con el contenido */
+                opacity: 1; /* Mostrar siempre en móvil */
+                pointer-events: auto;
+                visibility: visible;
+                margin-top: 1rem; /* Espacio debajo del título */
+                transform: none;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-gray-50 flex flex-col min-h-screen">
   <div id="loader-wrapper">
-        <div class="flex flex-col items-center">
-            <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget" class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
-            <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
-        </div>
+    <div class="flex flex-col items-center">
+        <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget" class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
+        <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
     </div>
+  </div>
     
-    <nav class="fixed top-0 w-full z-50 shadow-lg">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-20 items-center justify-between">
-                
-                <div class="flex items-center space-x-3">
-                    <img class="h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300" 
-                        src="img/BossBudget/LogoRedondo.png" alt="Logo">
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold hover:bg-purple-700 transition-all">Inicio</a>
-                    
-                    <div class="relative group">
-                        <button id="semestres-dropdown-button" class="px-4 py-2 rounded-lg text-black font-semibold flex items-center bg-white/50 hover:bg-yellow-500 transition-all">
-                            Semestres 
-                            <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" 
-                                id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                        
-                        <div id="semestres-dropdown-menu" 
-                            class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
-                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="semestres-dropdown-button">
-                                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre I-II</a>
-                                <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre III</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-yellow-500 hover:bg-white/20 transition-colors font-bold" role="menuitem">Semestre IV</a>
-                                <a href="SemestreV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre V</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                    class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
-                    Versión Alpha
-                </a>
-                
-                <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/90 rounded-b-lg">
-                <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Inicio</a>
-                <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre I-II</a>
-                <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre III</a>
-                <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-yellow-500 font-semibold bg-white/20">Semestre IV</a>
-                <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V</a>
-                <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                    class="block px-4 py-2 mx-4 mt-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
-            </div>
-        </div>
-    </nav>
-    
-    <main class="flex flex-col flex-grow">
-        
-        <section class="pt-32 pb-20 px-6 text-center">
-            <div class="max-w-7xl mx-auto fade-in">
-                <h1 class="text-6xl lg:text-8xl font-bold mb-6">
-                    <span class="text-black bebas"> SEMESTRE IV</span>
-                </h1>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
-                    Conocimientos y tecnologías que impulsaron el avance de la aplicación Boss Budget durante este semestre.
-                </p>
-            </div>
-        </section>
-
-        <div class="max-w-7xl mx-auto p-6 flex-grow">
-            
-            <section class="bg-purple-100 p-8 rounded-3xl shadow-2xl mb-16 fade-in">
-                <h2 class="text-3xl font-bold bebas text-purple-700 mb-8 text-center">Tecnologías Abordadas</h2>
-                <div class="flex flex-wrap justify-center items-center gap-10">
-                    <img src="img/logoHerramientas/mysql.png" alt="MySQL" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-full">
-                    <img src="img/logoHerramientas/excel.svg" alt="Excel" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
-                    <img src="img/logoHerramientas/html.png" alt="HTML" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
-                    <img src="img/logoHerramientas/tailwind.png" alt="Tailwind CSS" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
-                    <img src="img/logoHerramientas/access.png" alt="Access" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
-                    <img src="img/logoHerramientas/cpp.png" alt="C++" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
-                    <img src="img/logoHerramientas/powerbi.png" alt="Power BI" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
-                </div>
-            </section>
-
-            <section class="bg-purple-100 p-8 rounded-3xl shadow-2xl mb-16 fade-in">
-            <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Objetivos Específicos</h2>
-                    <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
-                        <li>Fortalecer la gestión y administración de bases de datos mediante la creación
-                           de usuarios y asignación de permisos en MySQL Workbench, garantizando
-                            la seguridad y correcta distribución de roles dentro del equipo de desarrollo.</li>
-                        <li>Implementar técnicas de encriptación de datos sensibles en la base de datos
-                           del proyecto Boss Budget para reforzar la protección y confidencialidad de 
-                           la información de los usuarios.<li>Diseñar el maquetado de la aplicación.</li>
-                        <li>Desarrollar y optimizar interfaces web utilizando HTML, 
-                          Tailwind CSS y JavaScript, aplicando buenas prácticas de diseño responsivo y usabilidad.</li>
-                        <li>Diseñar hojas de vida digitales interactivas como ejercicio práctico de 
-                          maquetación en HTML, CSS y JS, fortaleciendo la presentación profesional de los integrantes del equipo.</li>
-                        <li>Crear animaciones 2D aplicadas al proyecto Boss Budget empleando herramientas como Renderforest, 
-                          Animaker y similares, para mejorar la comunicación visual y la creatividad en el desarrollo.</li>
-                        <li>Gestionar los recursos del proyecto en un repositorio organizado en GitHub, 
-                          centralizando el código, documentación y material multimedia del portafolio académico.</li>
-                        <li>Aplicar herramientas complementarias como Excel, Access y Power BI para el análisis
-                           y la visualización de datos financieros vinculados al funcionamiento del proyecto.</li>
-                       
-
-
-                    </ul>
-                </div>
-              </section>
-            
-            <hr class="my-12 border-t-2 border-gray-200">
-            
-            <section class="w-full py-16 px-8 hero-pattern rounded-3xl shadow-2xl mb-16 fade-in">
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
-                    <div class="md:w-1/2 text-left glass-effect p-6 rounded-xl border border-white/30 card-hover">
-                        <h2 class="text-4xl font-bold bebas text-purple-700 mb-4">Introducción al Cuarto Semestre</h2>
-                        <p class="text-lg text-black">
-                            Para empezar el cuarto semestre decidimos crear un repositorio directamente 
-                            para lo relacionado al proyecto, para tener
-                            un mejor orden y presentación del portafolio y página web, 
-                            aparte de almacenar todo el código de la aplicación Boss Budget.
-                        </p>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <img src="img/Documentacion/repositorio.png" alt="Ejemplo de Repositorio" 
-                            class="w-full h-auto rounded-xl shadow-2xl border-4 border-yellow-400 object-cover card-hover">
-                    </div>
-                </div>
-            </section>
-            
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="py-12 bg-yellow-50 rounded-3xl shadow-2xl mb-16 fade-in">
-                <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
-                    
-                    <div class="md:w-1/2 flex justify-center card-hover">
-                        <iframe src="Doc/usuarios.pdf" width="100%" height="500px" 
-                            class="rounded-xl shadow-2xl border-4 border-purple-700"></iframe>
-                    </div>
-                    
-                    <div class="md:w-1/2 text-center md:text-left glass-effect p-6 rounded-xl border border-white/30 card-hover">
-                        <h2 class="text-3xl font-bold bebas text-yellow-500 mb-4">Creación de Usuarios y Asignación de Permisos (MySQL)</h2>
-                        <p class="text-lg text-black">
-                            Para el manejo de una base de datos entre varios integrantes
-                             es necesario que cada uno tenga previamente asignado un usuario
-                            y unos permisos correspondientes a su cargo.
-                             Para ello, se profundizó en el cómo crear usuarios y asignar permisos en MySQL Workbench,
-                              esto se realizó en la Gestión y Administración de Bases de Datos.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="w-full py-16 px-8 fade-in">
-                <div class="max-w-7xl mx-auto text-center">
-                    <h2 class="text-5xl font-bold bebas gradient-text mb-4">Hojas de Vida de los Integrantes en HTML</h2>
-                    <p class="text-xl text-gray-700 mb-10 max-w-4xl mx-auto">
-                        Para la clase de técnicas de animación vimos los parámetros para 
-                        diseñar una hoja de vida en HTML, CSS y JS.
-                        Conoce a los Desarrolladores de BossBudget haciendo clic en el botón 
-                        debajo de cada imagen para ver su hoja de vida.
-                    </p>
-                
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        
-                        <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
-                            <h3 class="text-2xl bebas text-yellow-400 mb-3">Brayan</h3>
-                            <img src="https://wl-genial.cf.tsp.li/resize/728x/webp/732/075/bae30c5c9284ba24ade836ae3e.png.webp" alt="Brayan" 
-                                class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
-                            <a href="https://brayanslopez.github.io/My-CV/" target="_blank" 
-                                class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
-                                Ver Hoja de Vida
-                            </a>
-                        </div>
-        
-                        <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
-                            <h3 class="text-2xl bebas text-yellow-400 mb-3">Dayana</h3>
-                            <img src="https://i.pinimg.com/736x/91/d4/5b/91d45b23c7f2fec07c3363ebdc2e09e5.jpg" alt="Dayana" 
-                                class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
-                            <a href="https://daya092.github.io/Hoja-de-vida/" target="_blank" 
-                                class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
-                                Ver Hoja de Vida
-                            </a>
-                        </div>
-        
-                        <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
-                            <h3 class="text-2xl bebas text-yellow-400 mb-3">Alejandro</h3>
-                            <img src="https://1.bp.blogspot.com/-_Q4WpwBXPfE/TjPPGcMdNcI/AAAAAAAAAtg/wCcxEsfFmA4/s640/15.jpg" alt="Alejandro" 
-                                class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
-                            <a href="https://davidjaure.github.io/HojaDeVida/" target="_blank" 
-                                class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
-                                Ver Hoja de Vida
-                            </a>
-                        </div>
-        
-                        <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
-                            <h3 class="text-2xl bebas text-yellow-400 mb-3">Andrés</h3>
-                            <img src="https://lippycorn.com/wp-content/uploads/2019/12/8772d4216cdbca41869d54c4f341b7a0.jpg" alt="Andrés" 
-                                class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
-                            <a href="https://digital-cv-html.vercel.app/" target="_blank" 
-                                class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
-                                Ver Hoja de Vida
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <hr class="my-12 border-t-2 border-gray-200">
-
-            <section class="py-16 px-4 hero-pattern rounded-3xl shadow-2xl mb-16 fade-in">
-                <div class="max-w-6xl mx-auto">
-                    <h2 class="text-5xl font-bold bebas text-purple-700 mb-4 text-center">Animaciones 2D de los Integrantes</h2>
-                    <p class="text-xl text-gray-700 mb-10 max-w-4xl mx-auto text-center">
-                        Para la clase de Técnicas de Animación creamos una animación 2D relacionada al proyecto.
-                        **Pasa el cursor** sobre el nombre de cada desarrollador para ver su animación.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
-                        <div class="relative group card-hover">
-                            <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
-                                <img src="https://lippycorn.com/wp-content/uploads/2019/12/8772d4216cdbca41869d54c4f341b7a0.jpg" alt="Andrés" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
-                                <span class="bebas text-yellow-400 font-bold text-xl">Andrés (Back-End)</span>
-                            </div>
-                            <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto z-10">
-                                <h3 class="text-yellow-400 font-bold text-xl mb-2">Andrés - Animaker 2D</h3>
-                                <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/za-1KvPE8T0" 
-                                    title="Video de Andrés" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-
-                        <div class="relative group card-hover">
-                            <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
-                                <img src="https://wl-genial.cf.tsp.li/resize/728x/webp/732/075/bae30c5c9284ba24ade836ae3e.png.webp" alt="Brayan" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
-                                <span class="bebas text-yellow-400 font-bold text-xl">Brayan (Full Stack)</span>
-                            </div>
-                            <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto z-10">
-                                <h3 class="text-yellow-400 font-bold text-xl mb-2">Brayan - Desarrollador Full Stack</h3>
-                                <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/ts_Hp2FZXY0" 
-                                    title="Video de Brayan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-
-                        <div class="relative group card-hover">
-                            <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
-                                <img src="https://1.bp.blogspot.com/-_Q4WpwBXPfE/TjPPGcMdNcI/AAAAAAAAAtg/wCcxEsfFmA4/s640/15.jpg" alt="Alejandro" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
-                                <span class="bebas text-yellow-400 font-bold text-xl">Alejandro (Front-End)</span>
-                            </div>
-                            <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto z-10">
-                                <h3 class="text-yellow-400 font-bold text-xl mb-2">Alejandro - Renderforest</h3>
-                                <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/5xrxr8G3Cvs" 
-                                    title="Video de Alejandro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-
-                        <div class="relative group card-hover">
-                            <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
-                                <img src="https://i.pinimg.com/736x/91/d4/5b/91d45b23c7f2fec07c3363ebdc2e09e5.jpg" alt="Dayana" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
-                                <span class="bebas text-yellow-400 font-bold text-xl">Dayana (DB Engineer)</span>
-                            </div>
-                            <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto z-10">
-                                <h3 class="text-yellow-400 font-bold text-xl mb-2">Dayana - Base de Datos</h3>
-                                <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/za-1KvPE8T0" 
-                                    title="Video de Dayana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <hr class="my-12 border-t-2 border-gray-200">
-                <div class="max-w-6xl mx-auto px-4 flex justify-center d:flex-row items-center gap-12">
-                    <div class="md:w-6/1 text-center md:text-left glass-effect p-6 rounded-xl border border-white/30 ">
-                        <h2 class="text-4xl font-bold bebas text-purple-700 mb-4">Encriptación de Datos en MySQL</h2>
-                        <p class="text-black text-lg">
-                            La protección de las bases de datos es un factor fundamental a tener en cuenta a la hora de crear un proyecto.
-                            Por ende, es necesario llevar a cabo una encriptación de los datos sensibles. Esto fue parte de lo que vimos
-                            en el segundo corte del cuarto semestre en la clase de Gestión y Administración de Bases de Datos.
-                        </p>
-                    </div>
-                </div>
+  <nav class="fixed top-0 w-full z-50 shadow-lg">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-20 items-center justify-between">
+              
+              <div class="flex items-center space-x-3">
+                  <img class="h-12 w-12 rounded-full hover:scale-110 transition-transform duration-300" 
+                      src="img/BossBudget/LogoRedondo.png" alt="Logo">
+              </div>
+              
+              <div class="hidden md:flex items-center space-x-1">
+                  <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold hover:bg-purple-700 transition-all">Inicio</a>
+                  
+                  <div class="relative group">
+                      <button id="semestres-dropdown-button" class="px-4 py-2 rounded-lg text-black font-semibold flex items-center bg-white/50 hover:bg-yellow-500 transition-all">
+                          Semestres 
+                          <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" 
+                              id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                          </svg>
+                      </button>
+                      
+                      <div id="semestres-dropdown-menu" 
+                          class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
+                          <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="semestres-dropdown-button">
+                              <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre I-II</a>
+                              <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre III</a>
+                              <a href="#" class="block px-4 py-2 text-sm text-yellow-500 hover:bg-white/20 transition-colors font-bold" role="menuitem">Semestre IV</a>
+                              <a href="SemestreV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors" role="menuitem">Semestre V</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
+                  class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+                  Versión Alpha
+              </a>
+              
+              <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                  </svg>
+              </button>
+          </div>
           
-              <div class="max-w-7xl mx-auto px-2 flex justify-center items-center gap-12">
-                <div class="w-full md:w-11/12 relative mx-auto card-hover">
-                  <div id="carousel1" class="overflow-hidden rounded-3xl shadow-2xl border-4  relative">
+          <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/90 rounded-b-lg">
+              <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Inicio</a>
+              <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre I-II</a>
+              <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre III</a>
+              <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-yellow-500 font-semibold bg-white/20">Semestre IV</a>
+              <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre V</a>
+              <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
+                  class="block px-4 py-2 mx-4 mt-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
+          </div>
+      </div>
+  </nav>
+    
+  <main class="flex flex-col flex-grow">
+      
+      <section class="pt-32 pb-20 px-6 text-center">
+          <div class="max-w-7xl mx-auto fade-in">
+              <h1 class="text-6xl lg:text-8xl font-bold mb-6">
+                  <span class="text-black bebas"> SEMESTRE IV</span>
+              </h1>
+              <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                  Conocimientos y tecnologías que impulsaron el avance de la aplicación Boss Budget durante este semestre.
+              </p>
+          </div>
+      </section>
+
+      <div class="max-w-7xl mx-auto p-6 flex-grow">
+          
+          <section class="bg-purple-100 p-8 rounded-3xl shadow-2xl mb-16 fade-in">
+              <h2 class="text-3xl font-bold bebas text-purple-700 mb-8 text-center">Tecnologías Abordadas</h2>
+              <div class="flex flex-wrap justify-center items-center gap-10">
+                  <img src="img/logoHerramientas/mysql.png" alt="MySQL" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-full">
+                  <img src="img/logoHerramientas/excel.svg" alt="Excel" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
+                  <img src="img/logoHerramientas/html.png" alt="HTML" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
+                  <img src="img/logoHerramientas/tailwind.png" alt="Tailwind CSS" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
+                  <img src="img/logoHerramientas/access.png" alt="Access" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
+                  <img src="img/logoHerramientas/cpp.png" alt="C++" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
+                  <img src="img/logoHerramientas/powerbi.png" alt="Power BI" class="h-16 w-auto transition-transform duration-300 hover:scale-125 hover:shadow-xl rounded-lg">
+              </div>
+          </section>
+
+          <section class="bg-purple-100 p-8 rounded-3xl shadow-2xl mb-16 fade-in">
+              <div class="glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
+                  <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Objetivos Específicos</h2>
+                  <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
+                      <li>Fortalecer la gestión y administración de bases de datos mediante la creación
+                          de usuarios y asignación de permisos en MySQL Workbench, garantizando
+                          la seguridad y correcta distribución de roles dentro del equipo de desarrollo.</li>
+                      <li>Implementar técnicas de encriptación de datos sensibles en la base de datos
+                          del proyecto Boss Budget para reforzar la protección y confidencialidad de 
+                          la información de los usuarios.</li>
+                      <li>Diseñar el maquetado de la aplicación.</li>
+                      <li>Desarrollar y optimizar interfaces web utilizando HTML, 
+                          Tailwind CSS y JavaScript, aplicando buenas prácticas de diseño responsivo y usabilidad.</li>
+                      <li>Diseñar hojas de vida digitales interactivas como ejercicio práctico de 
+                          maquetación en HTML, CSS y JS, fortaleciendo la presentación profesional de los integrantes del equipo.</li>
+                      <li>Crear animaciones 2D aplicadas al proyecto Boss Budget empleando herramientas como Renderforest, 
+                          Animaker y similares, para mejorar la comunicación visual y la creatividad en el desarrollo.</li>
+                      <li>Gestionar los recursos del proyecto en un repositorio organizado en GitHub, 
+                          centralizando el código, documentación y material multimedia del portafolio académico.</li>
+                      <li>Aplicar herramientas complementarias como Excel, Access y Power BI para el análisis
+                          y la visualización de datos financieros vinculados al funcionamiento del proyecto.</li>
+                  </ul>
+              </div>
+          </section>
+          
+          <hr class="my-12 border-t-2 border-gray-200">
+          
+          <section class="w-full py-16 px-8 hero-pattern rounded-3xl shadow-2xl mb-16 fade-in">
+              <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+                  <div class="md:w-1/2 text-left glass-effect p-6 rounded-xl border border-white/30 card-hover">
+                      <h2 class="text-4xl font-bold bebas text-purple-700 mb-4">Introducción al Cuarto Semestre</h2>
+                      <p class="text-lg text-black">
+                          Para empezar el cuarto semestre decidimos crear un repositorio directamente 
+                          para lo relacionado al proyecto, para tener
+                          un mejor orden y presentación del portafolio y página web, 
+                          aparte de almacenar todo el código de la aplicación Boss Budget.
+                      </p>
+                  </div>
+                  <div class="md:w-1/2 flex justify-center">
+                      <img src="img/Documentacion/repositorio.png" alt="Ejemplo de Repositorio" 
+                          class="w-full h-auto rounded-xl shadow-2xl border-4 border-yellow-400 object-cover card-hover">
+                  </div>
+              </div>
+          </section>
+          
+          <hr class="my-12 border-t-2 border-gray-200">
+
+          <section class="py-12 bg-yellow-50 rounded-3xl shadow-2xl mb-16 fade-in">
+              <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+                  
+                  <div class="md:w-1/2 flex justify-center card-hover">
+                      <iframe src="Doc/usuarios.pdf" width="100%" height="500px" 
+                          class="rounded-xl shadow-2xl border-4 border-purple-700"></iframe>
+                  </div>
+                  
+                  <div class="md:w-1/2 text-center md:text-left glass-effect p-6 rounded-xl border border-white/30 card-hover">
+                      <h2 class="text-3xl font-bold bebas text-yellow-500 mb-4">Creación de Usuarios y Asignación de Permisos (MySQL)</h2>
+                      <p class="text-lg text-black">
+                          Para el manejo de una base de datos entre varios integrantes
+                            es necesario que cada uno tenga previamente asignado un usuario
+                          y unos permisos correspondientes a su cargo.
+                            Para ello, se profundizó en el cómo crear usuarios y asignar permisos en MySQL Workbench,
+                            esto se realizó en la Gestión y Administración de Bases de Datos.
+                      </p>
+                  </div>
+              </div>
+          </section>
+
+          <hr class="my-12 border-t-2 border-gray-200">
+
+          <section class="w-full py-16 px-4 fade-in">
+              <div class="max-w-7xl mx-auto text-center">
+                  <h2 class="text-5xl font-bold bebas gradient-text mb-4">Hojas de Vida de los Integrantes en HTML</h2>
+                  <p class="text-xl text-gray-700 mb-10 max-w-4xl mx-auto">
+                      Para la clase de técnicas de animación vimos los parámetros para 
+                      diseñar una hoja de vida en HTML, CSS y JS.
+                      Conoce a los Desarrolladores de BossBudget haciendo clic en el botón 
+                      debajo de cada imagen para ver su hoja de vida.
+                  </p>
+                  
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                      
+                      <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
+                          <h3 class="text-2xl bebas text-yellow-400 mb-3">Brayan</h3>
+                          <img src="https://wl-genial.cf.tsp.li/resize/728x/webp/732/075/bae30c5c9284ba24ade836ae3e.png.webp" alt="Brayan" 
+                              class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
+                          <a href="https://brayanslopez.github.io/My-CV/" target="_blank" 
+                              class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
+                              Ver Hoja de Vida
+                          </a>
+                      </div>
+      
+                      <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
+                          <h3 class="text-2xl bebas text-yellow-400 mb-3">Dayana</h3>
+                          <img src="https://i.pinimg.com/736x/91/d4/5b/91d45b23c7f2fec07c3363ebdc2e09e5.jpg" alt="Dayana" 
+                              class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
+                          <a href="https://daya092.github.io/Hoja-de-vida/" target="_blank" 
+                              class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
+                              Ver Hoja de Vida
+                          </a>
+                      </div>
+      
+                      <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
+                          <h3 class="text-2xl bebas text-yellow-400 mb-3">Alejandro</h3>
+                          <img src="https://1.bp.blogspot.com/-_Q4WpwBXPfE/TjPPGcMdNcI/AAAAAAAAAtg/wCcxEsfFmA4/s640/15.jpg" alt="Alejandro" 
+                              class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
+                          <a href="https://davidjaure.github.io/HojaDeVida/" target="_blank" 
+                              class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
+                              Ver Hoja de Vida
+                          </a>
+                      </div>
+      
+                      <div class="flex flex-col items-center gradient-bg p-6 rounded-xl shadow-lg border border-white/30 card-hover">
+                          <h3 class="text-2xl bebas text-yellow-400 mb-3">Andrés</h3>
+                          <img src="https://lippycorn.com/wp-content/uploads/2019/12/8772d4216cdbca41869d54c4f341b7a0.jpg" alt="Andrés" 
+                              class="w-full h-48 object-cover rounded-lg mb-4 border-2 border-white">
+                          <a href="https://digital-cv-html.vercel.app/" target="_blank" 
+                              class="inline-block px-6 py-2 bg-yellow-400 text-purple-900 font-bold rounded-full transition-all duration-300 hover:bg-yellow-500 hover:scale-105">
+                              Ver Hoja de Vida
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          
+          <hr class="my-12 border-t-2 border-gray-200">
+
+          <section class="py-16 px-4 hero-pattern rounded-3xl shadow-2xl mb-16 fade-in">
+              <div class="max-w-6xl mx-auto">
+                  <h2 class="text-5xl font-bold bebas text-purple-700 mb-4 text-center">Animaciones 2D de los Integrantes</h2>
+                  <p class="text-xl text-gray-700 mb-10 max-w-4xl mx-auto text-center">
+                      Para la clase de Técnicas de Animación creamos una animación 2D relacionada al proyecto.
+                      **Pasa el cursor** sobre el nombre de cada desarrollador (o toca en móvil) para ver su animación.
+                  </p>
+                  
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      
+                      <div class="relative group card-hover">
+                          <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
+                              <img src="https://lippycorn.com/wp-content/uploads/2019/12/8772d4216cdbca41869d54c4f341b7a0.jpg" alt="Andrés" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
+                              <span class="bebas text-yellow-400 font-bold text-xl">Andrés (Back-End)</span>
+                          </div>
+                          <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 video-dropdown">
+                              <h3 class="text-yellow-400 font-bold text-xl mb-2">Andrés - Animaker 2D</h3>
+                              <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/za-1KvPE8T0" 
+                                  title="Video de Andrés" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                              </iframe>
+                          </div>
+                      </div>
+
+                      <div class="relative group card-hover">
+                          <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
+                              <img src="https://wl-genial.cf.tsp.li/resize/728x/webp/732/075/bae30c5c9284ba24ade836ae3e.png.webp" alt="Brayan" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
+                              <span class="bebas text-yellow-400 font-bold text-xl">Brayan (Full Stack)</span>
+                          </div>
+                          <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 video-dropdown">
+                              <h3 class="text-yellow-400 font-bold text-xl mb-2">Brayan - Desarrollador Full Stack</h3>
+                              <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/ts_Hp2FZXY0" 
+                                  title="Video de Brayan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                              </iframe>
+                          </div>
+                      </div>
+
+                      <div class="relative group card-hover">
+                          <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
+                              <img src="https://1.bp.blogspot.com/-_Q4WpwBXPfE/TjPPGcMdNcI/AAAAAAAAAtg/wCcxEsfFmA4/s640/15.jpg" alt="Alejandro" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
+                              <span class="bebas text-yellow-400 font-bold text-xl">Alejandro (Front-End)</span>
+                          </div>
+                          <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 video-dropdown">
+                              <h3 class="text-yellow-400 font-bold text-xl mb-2">Alejandro - Renderforest</h3>
+                              <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/5xrxr8G3Cvs" 
+                                  title="Video de Alejandro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                              </iframe>
+                          </div>
+                      </div>
+
+                      <div class="relative group card-hover">
+                          <div class="flex items-center gradient-bg p-4 rounded-xl shadow-lg cursor-pointer transition duration-300 border border-white/30">
+                              <img src="https://i.pinimg.com/736x/91/d4/5b/91d45b23c7f2fec07c3363ebdc2e09e5.jpg" alt="Dayana" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-white">
+                              <span class="bebas text-yellow-400 font-bold text-xl">Dayana (DB Engineer)</span>
+                          </div>
+                          <div class="absolute left-0 top-full mt-2 w-full glass-effect rounded-xl shadow-2xl p-4 video-dropdown">
+                              <h3 class="text-yellow-400 font-bold text-xl mb-2">Dayana - Base de Datos</h3>
+                              <iframe class="w-full h-64 rounded-lg shadow-lg" src="https://www.youtube.com/embed/za-1KvPE8T0" 
+                                  title="Video de Dayana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                              </iframe>
+                          </div>
+                      </div>
+                      </div>
+              </div>
+          </section>
+
+          <hr class="my-12 border-t-2 border-gray-200">
+          
+          <div class="max-w-6xl mx-auto px-4 flex justify-center d:flex-row items-center gap-12">
+              <div class="md:w-full text-center md:text-left glass-effect p-6 rounded-xl border border-white/30 ">
+                  <h2 class="text-4xl font-bold bebas text-purple-700 mb-4">Encriptación de Datos en MySQL</h2>
+                  <p class="text-black text-lg">
+                      La protección de las bases de datos es un factor fundamental a tener en cuenta a la hora de crear un proyecto.
+                      Por ende, es necesario llevar a cabo una encriptación de los datos sensibles. Esto fue parte de lo que vimos
+                      en el segundo corte del cuarto semestre en la clase de Gestión y Administración de Bases de Datos.
+                  </p>
+              </div>
+          </div>
+          
+        <div class="max-w-7xl mx-auto px-2 flex justify-center items-center gap-12">
+              <div class="w-full md:w-11/12 relative mx-auto card-hover">
+                  <div id="carousel1" class="overflow-hidden rounded-3xl shadow-2xl border-4 relative">
                       <img src="img/encriptacion/encrypt1.png" class="w-full h-[700px] object-cover hidden" alt="Encriptación de Datos 1">
                       <img src="img/encriptacion/encrypt2.png" class="w-full h-[500px] object-cover hidden" alt="Encriptación de Datos 2">
                       <img src="img/encriptacion/encrypt3.png" class="w-full h-[500px] object-cover hidden" alt="Encriptación de Datos 3">
                   </div>
 
                   <button onclick="prevSlide('carousel1')" 
-                      class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-purple-700 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform">
+                      class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-purple-700 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-10">
                       ❮
                   </button>
                   <button onclick="nextSlide('carousel1')" 
-                      class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-purple-700 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform">
+                      class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-purple-700 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform z-10">
                       ❯
                   </button>
 
                   <div class="flex justify-center mt-4 gap-3" id="dots-carousel1"></div>
-                </div>
               </div>
+          </div>
 
-            
-            
-        </div>
-    </main>
-    <nav aria-label="Page navigation" class="flex justify-center mt-12">
+      </div>
+  </main>
+  
+  <nav aria-label="Page navigation" class="flex justify-center mt-12 mb-12">
     <ul class="flex items-center -space-x-px h-12 text-lg">
         <li>
       <a href="semestre_lll.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">
@@ -442,7 +469,7 @@
         <a href="semestre_lll.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">3</a>
         </li>
         <li>
-        <a href="SemestreIV.html" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-black border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black dark:border-purple-700 dark:bg-purple-700 dark:text-black rounded-full">4</a>
+        <a href="SemestreIV.html" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-white border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black dark:border-purple-700 dark:bg-purple-700 dark:text-white rounded-full">4</a>
         </li>
         <li>
         <a href="SemestreV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">5</a>
@@ -456,126 +483,127 @@
         </a>
         </li>
     </ul>
-    </nav>
+  </nav>
 
-    <footer class="bg-transparent py-12 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 mb-8">
-                <div>
-                    <h2 class="text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
-                        Boss Budget
-                    </h2>
-                    <p class="text-gray-600 text-lg">
-                        Optimiza tus finanzas con nuestra plataforma intuitiva.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
-                            aria-label="Canal de YouTube">
-                            <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
-                        </a>
-                        <a href="https://github.com/BossBudgetProyect" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
-                            aria-label="Repositorio de Github">
-                            <img class="w-10 h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
-                        </a>
-                        <a href="mailto:bossbudgetproyect@gmail.com" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors"
-                            aria-label="Enviar correo a Gmail">
-                            <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
-                        </a>
-                    </div>
-                </div>
+  <footer class="bg-transparent py-12 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
+            <div>
+                <h2 class="text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
+                    Boss Budget
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    Optimiza tus finanzas con nuestra plataforma intuitiva.
+                </p>
             </div>
             
-            <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-600">
-                © 2025 Boss Budget. Todos los derechos reservados.
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
+                <div class="flex space-x-4">
+                    <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" 
+                        class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                        aria-label="Canal de YouTube">
+                        <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                    </a>
+                    <a href="https://github.com/BossBudgetProyect" 
+                        class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                        aria-label="Repositorio de Github">
+                        <img class="w-10 h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+                    </a>
+                    <a href="mailto:bossbudgetproyect@gmail.com" 
+                        class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors"
+                        aria-label="Enviar correo a Gmail">
+                        <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
+                    </a>
+                </div>
             </div>
         </div>
-    </footer>
+        
+        <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-600">
+            © 2025 Boss Budget. Todos los derechos reservados.
+        </div>
+    </div>
+  </footer>
     
-    <script>
-        // Lógica para el menú desplegable (escritorio)
-        document.getElementById('semestres-dropdown-button').addEventListener('click', function() {
-            const menu = document.getElementById('semestres-dropdown-menu');
-            const arrow = document.getElementById('dropdown-arrow');
-            const isHidden = menu.classList.contains('hidden');
-            
-            if (isHidden) {
-                menu.classList.remove('hidden');
-                arrow.classList.add('rotate-180');
-            } else {
-                menu.classList.add('hidden');
-                arrow.classList.remove('rotate-180');
-            }
-        });
+  <script>
+      // Lógica para el menú desplegable (escritorio)
+      document.getElementById('semestres-dropdown-button').addEventListener('click', function() {
+          const menu = document.getElementById('semestres-dropdown-menu');
+          const arrow = document.getElementById('dropdown-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          
+          if (isHidden) {
+              menu.classList.remove('hidden');
+              arrow.classList.add('rotate-180');
+          } else {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+          }
+      });
 
-        // Lógica para el menú móvil (hamburguesa)
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+      // Lógica para el menú móvil (hamburguesa)
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+          const mobileMenu = document.getElementById('mobile-menu');
+          mobileMenu.classList.toggle('hidden');
+      });
 
-        // Lógica para el Carrusel (Optimizada para múltiples carruseles)
-        const carousels = ['carousel1'];
+      // Lógica para el Carrusel (Optimizada para múltiples carruseles)
+      const carousels = ['carousel1'];
 
-        carousels.forEach(id => {
-            let index = 0;
-            const container = document.getElementById(id);
-            const images = container.querySelectorAll('img');
-            const dotsContainer = document.getElementById(`dots-${id}`);
+      carousels.forEach(id => {
+          let index = 0;
+          const container = document.getElementById(id);
+          const images = container.querySelectorAll('img');
+          const dotsContainer = document.getElementById(`dots-${id}`);
 
-            const showSlide = (i) => {
-                images.forEach((img, idx) => {
-                    img.classList.toggle('hidden', idx !== i);
-                });
-                const dots = dotsContainer.querySelectorAll('button');
-                dots.forEach((dot, idx) => {
-                    // Estilos de puntitos activos/inactivos
-                    dot.classList.toggle('bg-purple-700', idx === i);
-                    dot.classList.toggle('bg-gray-300', idx !== i);
-                });
-            };
+          const showSlide = (i) => {
+              images.forEach((img, idx) => {
+                  img.classList.toggle('hidden', idx !== i);
+              });
+              const dots = dotsContainer.querySelectorAll('button');
+              dots.forEach((dot, idx) => {
+                  // Estilos de puntitos activos/inactivos
+                  dot.classList.toggle('bg-purple-700', idx === i);
+                  dot.classList.toggle('bg-gray-300', idx !== i);
+              });
+          };
 
-            // Inicializar puntitos
-            images.forEach((_, i) => {
-                const dot = document.createElement('button');
-                dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition-colors duration-300';
-                dot.addEventListener('click', () => {
-                    index = i;
-                    showSlide(index);
-                });
-                dotsContainer.appendChild(dot);
-            });
+          // Inicializar puntitos
+          images.forEach((_, i) => {
+              const dot = document.createElement('button');
+              dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition-colors duration-300';
+              dot.addEventListener('click', () => {
+                  index = i;
+                  showSlide(index);
+              });
+              dotsContainer.appendChild(dot);
+          });
 
-            showSlide(index);
+          showSlide(index);
 
-            window[`nextSlide`] = function(carouselId) {
-                if (carouselId !== id) return;
-                index = (index + 1) % images.length;
-                showSlide(index);
-            }
+          window[`nextSlide`] = function(carouselId) {
+              if (carouselId !== id) return;
+              index = (index + 1) % images.length;
+              showSlide(index);
+          }
 
-            window[`prevSlide`] = function(carouselId) {
-                if (carouselId !== id) return;
-                index = (index - 1 + images.length) % images.length;
-                showSlide(index);
-            }
-        });
-        // 🔑 Lógica para ocultar el Loader una vez que la página ha cargado
-        window.addEventListener('load', function() {
-            const loaderWrapper = document.getElementById('loader-wrapper');
-            // Oculta el loader
-            setTimeout(() => {
-                if (loaderWrapper) {
-                    loaderWrapper.classList.add('hidden-loader');
-                }
-            }, 50);
-        });
-    </script>
+          window[`prevSlide`] = function(carouselId) {
+              if (carouselId !== id) return;
+              index = (index - 1 + images.length) % images.length;
+              showSlide(index);
+          }
+      });
+      
+      // 🔑 Lógica para ocultar el Loader una vez que la página ha cargado
+      window.addEventListener('load', function() {
+          const loaderWrapper = document.getElementById('loader-wrapper');
+          // Oculta el loader
+          setTimeout(() => {
+              if (loaderWrapper) {
+                  loaderWrapper.classList.add('hidden-loader');
+              }
+          }, 50);
+      });
+  </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Boss Budget Web - Semestre III</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="img/BossBudget/LogoRedondo.png" type="image/png">
@@ -86,6 +86,18 @@
             opacity: 0;
             visibility: hidden;
         }
+        
+        /* NUEVOS ESTILOS RESPONSIVE PARA IMÁGENES/MEDIA EN CARROUSELES */
+        /* Asegura que las imágenes en los carruseles se ajusten bien */
+        .carousel-image-container {
+            height: 400px; /* Altura más baja para móviles */
+            /* En pantallas grandes (lg), usar 550px como estaba */
+        }
+        @media (min-width: 1024px) {
+            .carousel-image-container {
+                height: 550px;
+            }
+        }
     </style>
 </head>
 
@@ -97,6 +109,7 @@
             <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
         </div>
     </div>
+    
     <nav class="fixed top-0 w-full z-50 shadow-lg">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             
@@ -132,18 +145,18 @@
                 </div>
                 
                 <a href="https://bossbudgetproyect.github.io/SitioWeb/" 
-                    class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+                    class="hidden md:block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg text-sm">
                     Versión Alpha
                 </a>
                 
-                <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
+                <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-purple-600">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
             </div>
             
-            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/90 rounded-b-lg">
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 bg-gray-900/ rounded-b-lg">
                 <a href="index.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Inicio</a>
                 <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/20">Semestre I-II</a>
                 <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-yellow-500 font-semibold bg-white/20">Semestre III</a>
@@ -157,30 +170,33 @@
     
     <main class="flex flex-col flex-grow">
         
-        <section class="pt-32 pb-20 px-6 hero-pattern text-center">
+        <section class="pt-32 pb-16 px-4 sm:px-6 hero-pattern text-center">
             <div class="max-w-7xl mx-auto fade-in">
-                <h1 class="text-6xl lg:text-8xl font-bold mb-6 ">
+                <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold mb-4">
                     <span class="bebas text-black">SEMESTRE III</span></h1>
-                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                <p class="text-base sm:text-xl text-gray-700 max-w-3xl mx-auto">
                     Documentación técnica, diagramas y mockups de la fase de diseño del software.
                 </p>
             </div>
         </section>
 
-        <div class="max-w-6xl mx-auto p-6 flex-grow">
+        <div class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 flex-grow">
 
-            <section class="flex flex-col lg:flex-row gap-12 lg:gap-20 mb-20 items-center">
-                <div class="flex-1 w-full card-hover">
-                    <video 
-                        class="w-[480px] h-[550px] rounded-3xl shadow-2xl ring-4 ring-yellow-400 object-cover"
-                        controls>
-                        <source src="video/Video Boss.mp4" type="video/mp4">
-                      </video>
+            <section class="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-16 sm:mb-20 items-center">
+                
+                <div class="flex-1 w-full card-hover flex justify-center">
+                    <div class="w-full max-w-sm sm:max-w-md lg:max-w-full h-96 lg:h-[550px]">
+                        <video 
+                            class="w-full h-full rounded-3xl shadow-2xl ring-4 ring-yellow-400 object-cover"
+                            controls>
+                            <source src="video/Video Boss.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
-            
-                <div class="flex-1 w-full glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Objetivos Específicos</h2>
-                    <ul class="list-disc list-inside space-y-3 text-black text-lg leading-relaxed">
+                
+                <div class="flex-1 w-full glass-effect p-6 sm:p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
+                    <h2 class="text-3xl sm:text-4xl font-bold bebas text-purple-700 mb-4 sm:mb-6 text-center">Objetivos Específicos</h2>
+                    <ul class="list-disc list-inside space-y-2 sm:space-y-3 text-black text-base sm:text-lg leading-relaxed">
                         <li>Diseñar diagramas de clases correspondiente a la aplicación.</li>
                         <li>Realizar la conexión de la base de datos con el lenguaje de programación seleccionado.</li>
                         <li>Aplicar la metodología Scrum en el proyecto haciendo uso de herramientas como Jira.</li>
@@ -191,15 +207,15 @@
                 </div>
             </section>
             
-            <hr class="my-12 border-t-2 border-gray-200">
+            <hr class="my-8 sm:my-12 border-t-2 border-gray-200">
 
-            <section class="flex flex-col lg:flex-row gap-8 mb-16 items-center">
+            <section class="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-16 items-center">
                 
-                <div class="flex-1 glass-effect p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
-                    <h2 class="text-4xl font-bold bebas text-purple-700 mb-6 text-center">Perspectiva del Producto</h2>
-                    <p class="text-justify text-black text-lg leading-relaxed">
+                <div class="flex-1 glass-effect p-6 sm:p-8 rounded-2xl shadow-xl backdrop-blur-md border border-white/30 card-hover">
+                    <h2 class="text-3xl sm:text-4xl font-bold bebas text-purple-700 mb-4 sm:mb-6 text-center">Perspectiva del Producto</h2>
+                    <p class="text-justify text-black text-base sm:text-lg leading-relaxed">
                         La aplicación Boss Budget será un producto diseñado 
-                        específicamente para dispositivos móviles (iOS y Android),
+                        específicamente para **dispositivos móviles** (iOS y Android),
                         siendo esto fundamental gracias a la accesibilidad que brinda a los usuarios. 
                         De esta manera podrían gestionar y registrar sus finanzas de manera rápida y eficaz 
                         en cualquier momento y lugar. El diseño debe ser óptimo e intuitivo para garantizar 
@@ -209,208 +225,208 @@
                     </p>
                 </div>
                 
-                <div class="flex-1 card-hover">
-                    <iframe class="w-full h-[600px] rounded-2xl shadow-2xl border-4 border-yellow-400" src="Doc/Boss-Budget-Formato-IEEE.pdf"></iframe>
+                <div class="flex-1 w-full card-hover">
+                    <iframe class="w-full h-96 lg:h-[600px] rounded-2xl shadow-2xl border-4 border-yellow-400" src="Doc/Boss-Budget-Formato-IEEE.pdf"></iframe>
                 </div>
             </section>
 
-            <hr class="my-12 border-t-2 border-gray-200">
+            <hr class="my-8 sm:my-12 border-t-2 border-gray-200">
 
-            <section class="bg-purple-100 p-8 rounded-3xl shadow-2xl mb-16">
+            <section class="bg-purple-100 p-6 sm:p-8 rounded-3xl shadow-2xl mb-16">
                 <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-diagramas">
-                    <div class="text-center mb-10">
-                        <h2 class="text-5xl lg:text-6xl font-bold bebas gradient-text">Diagramas UML</h2>
+                    <div class="text-center mb-8 sm:mb-10">
+                        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold bebas gradient-text">Diagramas UML</h2>
                     </div>
                 
                     <div class="flex transition-transform duration-500" id="slides-diagramas">
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama de casos de uso</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
-                                <img src="img/Diagramas/DiagramaCasosUso.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Casos de Uso" />
+                        <div class="min-w-full text-center p-2 sm:p-4"> 
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-purple-900">Diagrama de casos de uso</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
+                                <img src="img/Diagramas/DiagramaCasosUso.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Casos de Uso" /> 
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama de estado - Objeto Ingresos</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-purple-900">Diagrama de estado - Objeto Ingresos</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Diagramas/Diagrrama de estado.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Estado" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Registrarse</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-purple-900">Diagrama actividades - Registrarse</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Diagramas/Diagrama registrarse.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Registrarse" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Creación presupuesto</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-purple-900">Diagrama actividades - Creación presupuesto</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Diagramas/CasoCreacioPresupuesto.png" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Creación de Presupuesto" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Reportes usuario</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-purple-900">Diagrama actividades - Reportes usuario</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Diagramas/CasoReporteUsuario.jpg" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Reportes de Usuario" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-purple-900">Diagrama actividades - Pago de Suscripción</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-purple-900">Diagrama actividades - Pago de Suscripción</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Diagramas/CasoPagoSuscripcion.jpg" class="mx-auto w-full h-full object-contain rounded" alt="Diagrama de Actividades - Pago de Suscripción" />
                             </div>
                         </div>
                     </div>
                 
-                    <button onclick="cambiarSlideDiagramas(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                    <button onclick="cambiarSlideDiagramas(-1)" class="absolute left-1 sm:left-4 top-[50%] sm:top-[55%] -translate-y-1/2 gradient-bg text-white p-2 sm:p-3 rounded-full shadow-lg hover:scale-110 transition-transform text-xl">
                         ❮
                     </button>
-                    <button onclick="cambiarSlideDiagramas(1)" class="absolute right-4 top-[55%] -translate-y-1/2 gradient-bg text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                    <button onclick="cambiarSlideDiagramas(1)" class="absolute right-1 sm:right-4 top-[50%] sm:top-[55%] -translate-y-1/2 gradient-bg text-white p-2 sm:p-3 rounded-full shadow-lg hover:scale-110 transition-transform text-xl">
                         ❯
                     </button>
                 </div>
             </section>
             
-            <hr class="my-12 border-t-2 border-gray-200">
+            <hr class="my-8 sm:my-12 border-t-2 border-gray-200">
 
-            <section class="bg-yellow-50 p-8 rounded-3xl shadow-2xl mb-16">
+            <section class="bg-yellow-50 p-6 sm:p-8 rounded-3xl shadow-2xl mb-16">
                 <div class="max-w-7xl mx-auto relative overflow-hidden" id="carrusel-mockups">
-                    <div class="text-center mb-10">
-                        <h2 class="text-5xl lg:text-6xl font-bold bebas text-purple-700">Mockups</h2>
+                    <div class="text-center mb-8 sm:mb-10">
+                        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold bebas text-purple-700">Mockups</h2>
                     </div>
                 
                     <div class="flex transition-transform duration-500" id="slides-mockups">
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Ingresar Usuario Nuevo</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Ingresar Usuario Nuevo</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup1.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Ingresar Usuario Nuevo" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Menú Principal</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Menú Principal</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup2.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Menú Principal" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Perfil de Usuario</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Perfil de Usuario</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup3.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Perfil de Usuario" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Registro de Ingresos</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Registro de Ingresos</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup4.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Registro de Ingresos" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Visualización de Gastos</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Visualización de Gastos</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup5.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Visualización de Gastos" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Registro de Créditos</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Registro de Créditos</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup6.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Registro de Créditos" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Generación de Reportes Financieros</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Generación de Reportes Financieros</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup7.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Generación de Reportes" />
                             </div>
                         </div>
-                        <div class="min-w-full text-center p-4">
-                            <h3 class="font-semibold mb-4 text-2xl text-yellow-700">Generación de Recordatorios</h3>
-                            <div class="bg-white p-4 rounded-xl shadow-lg border border-gray-200 h-[550px] flex items-center justify-center">
+                        <div class="min-w-full text-center p-2 sm:p-4">
+                            <h3 class="font-semibold mb-3 text-xl sm:text-2xl text-yellow-700">Generación de Recordatorios</h3>
+                            <div class="bg-white p-2 sm:p-4 rounded-xl shadow-lg border border-gray-200 carousel-image-container flex items-center justify-center">
                                 <img src="img/Mockups/Mockup8.png" class="mx-auto w-full h-full object-contain rounded" alt="Mockup Generación de Recordatorios" />
                             </div>
                         </div>
                     </div>
                 
-                    <button onclick="cambiarSlideMockup(-1)" class="absolute left-4 top-[55%] -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                    <button onclick="cambiarSlideMockup(-1)" class="absolute left-1 sm:left-4 top-[50%] sm:top-[55%] -translate-y-1/2 bg-purple-700 text-white p-2 sm:p-3 rounded-full shadow-lg hover:scale-110 transition-transform text-xl">
                         ❮
                     </button>
-                    <button onclick="cambiarSlideMockup(1)" class="absolute right-4 top-[55%] -translate-y-1/2 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+                    <button onclick="cambiarSlideMockup(1)" class="absolute right-1 sm:right-4 top-[50%] sm:top-[55%] -translate-y-1/2 bg-purple-700 text-white p-2 sm:p-3 rounded-full shadow-lg hover:scale-110 transition-transform text-xl">
                         ❯
                     </button>
                 </div>
             </section>
         </div>
+        
+        <nav aria-label="Page navigation" class="flex justify-center my-8 sm:my-12 px-4">
+            <ul class="flex items-center -space-x-px h-10 text-sm sm:text-lg">
+                <li>
+                    <a href="SemestreI_II.html" class="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-white dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-l-full">
+                        <span class="sr-only">Previous</span>
+                        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-white dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white">1</a>
+                </li>
+                <li>
+                    <a href="SemestreI_II.html" class="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-white dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white">2</a>
+                </li>
+                <li>
+                    <a href="semestre_lll.html" aria-current="page" class="z-10 flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-white border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black dark:border-purple-700 dark:bg-purple-700 dark:text-white">3</a>
+                </li>
+                <li>
+                    <a href="SemestreIV.html" class="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-white dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white">4</a>
+                </li>
+                <li>
+                    <a href="SemestreV.html" class="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-white dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white">5</a>
+                </li>
+                <li>
+                    <a href="SemestreIV.html" class="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-white dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-r-full">
+                        <span class="sr-only">Next</span>
+                        <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </main>
 
-        <nav aria-label="Page navigation" class="flex justify-center mt-12">
-    <ul class="flex items-center -space-x-px h-12 text-lg">
-        <li>
-      <a href="SemestreI_II.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">
-        <span class="sr-only">Previous</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
-        </a>
-        </li>
-        <li>
-        <a href="index.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">1</a>
-        </li>
-        <li>
-        <a href="SemestreI_II.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">2</a>
-        </li>
-        <li>
-        <a href="semestre_lll.html" aria-current="page" class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-black border border-purple-300 bg-purple-700 hover:bg-yellow-500 hover:text-black dark:border-purple-700 dark:bg-purple-700 dark:text-black rounded-full">3</a>
-        </li>
-        <li>
-        <a href="SemestreIV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">4</a>
-        </li>
-        <li>
-        <a href="SemestreV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">5</a>
-        </li>
-        <li>
-        <a href="SemestreIV.html" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-transparent border border-black hover:bg-purple-700 hover:text-black dark:bg-gray-200 dark:border-purple-700 dark:text-black dark:hover:bg-purple-700 dark:hover:text-white rounded-full">
-            <span class="sr-only">Next</span>
-            <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-        </a>
-        </li>
-    </ul>
-    </nav>
-
-    <footer class="bg-transparent py-12 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 mb-8">
+    <footer class="bg-transparent py-8 sm:py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 sm:gap-12 mb-8 text-center md:text-left">
                 <div>
-                    <h2 class="text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-4">
+                    <h2 class="text-3xl sm:text-4xl bebas font-bold bg-gradient-to-r from-yellow-600 to-purple-400 bg-clip-text text-transparent mb-3 sm:mb-4">
                         Boss Budget
                     </h2>
-                    <p class="text-gray-600 text-lg">
+                    <p class="text-gray-600 text-base sm:text-lg">
                         Optimiza tus finanzas con nuestra plataforma intuitiva.
                     </p>
                 </div>
                 
-                <div>
+                <div class="md:text-right">
                     <h3 class="text-xl font-bold mb-4 text-black">Contáctate con nosotros</h3>
-                    <div class="flex space-x-4">
+                    <div class="flex justify-center md:justify-end space-x-4">
                         <a href="https://youtube.com/@bossbudgetproyect?si=L-tMly7t90egZEwW" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                            class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
                             aria-label="Canal de YouTube">
-                            <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                            <img class="w-6 h-6 sm:w-8 sm:h-8" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
                         </a>
                         <a href="https://github.com/BossBudgetProyect" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                            class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
                             aria-label="Repositorio de Github">
-                            <img class="w-10 h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+                            <img class="w-8 h-8 sm:w-10 sm:h-10 " src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
                         </a>
                         <a href="mailto:bossbudgetproyect@gmail.com" 
-                            class="w-12 h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors"
+                            class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-700 rounded-full flex items-center justify-center hover:bg-yellow-700 transition-colors"
                             aria-label="Enviar correo a Gmail">
-                            <img class="w-10 h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
+                            <img class="w-8 h-8 sm:w-10 sm:h-10" src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="Gmail">
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-300 pt-8 text-center text-sm text-gray-600">
+            <div class="border-t border-gray-300 pt-6 text-center text-xs sm:text-sm text-gray-600">
                 © 2025 Boss Budget. Todos los derechos reservados.
             </div>
         </div>
