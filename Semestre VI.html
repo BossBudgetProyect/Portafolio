@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boss Budget Web</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="/img/BossBudget/LogoRedondo.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+
+    .bebas { font-family: 'Bebas Neue', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%); }
+    .gradient-text {
+      background: linear-gradient(135deg, #cc7aec 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    .floating { animation: floating 3s ease-in-out infinite; }
+    @keyframes floating { 0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)} }
+    .fade-in { animation: fadeIn 0.8s ease-in; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+    nav { backdrop-filter: blur(10px); background: transparent; }
+    
+    #loader-wrapper {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #f8fafc;
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999; transition: opacity 0.5s ease;
+    }
+    .loader-icon {
+      width: 100px; height: 100px; animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
+    .hidden-loader { opacity: 0; visibility: hidden; }
+
+
+    .seccion-fondo {
+      background-image: url("img/BossBudget/PosterBBsinLogos.png"); /* tu ruta aquí */
+      background-size: cover;       /* hace que la imagen ocupe todo el espacio */
+      background-position: center;  /* centra la imagen */
+      background-repeat: no-repeat;
+      height: 100vh;                /* altura del 100% de la pantalla */
+      display: flex;                /* centra el contenido */
+      justify-content: center;      /* centra horizontalmente */
+      align-items: center;          /* centra verticalmente */
+      color: white;                 /* color del texto */
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 flex flex-col min-h-screen">
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div class="flex flex-col items-center">
+      <img src="img/BossBudget/LogoRedondo.png" alt="Cargando Boss Budget"
+           class="loader-icon rounded-full border-4 border-purple-700 border-t-yellow-400 mb-4 shadow-xl">
+      <p class="text-xl font-bold bebas text-purple-700">Cargando...</p>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 shadow-lg bg-white/50 backdrop-blur-lg">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-20 items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img class="h-10 w-10 sm:h-12 sm:w-12 rounded-full hover:scale-110 transition-transform duration-300" 
+               src="img/BossBudget/Logo.png" alt="Logo">
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="index.html" class="px-4 py-2 rounded-lg text-black font-semibold bg-white/50 hover:bg-purple-700 hover:text-white transition-all">Inicio</a>
+          <div class="relative group">
+            <button id="semestres-dropdown-button"
+                    class="px-4 py-2 rounded-lg text-black font-semibold flex items-center hover:bg-yellow-500 transition-all">
+              Semestres
+              <svg class="ml-2 h-4 w-4 transform transition-transform duration-200" id="dropdown-arrow"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div id="semestres-dropdown-menu"
+                 class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 hidden origin-top-right z-50">
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="SemestreI_II.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre I-II</a>
+                <a href="semestre_lll.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre III</a>
+                <a href="SemestreIV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre IV</a>
+                <a href="SemestreV.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre V</a>
+                <a href="Semestre VI.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre VI</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://bossbudgetproyect.github.io/SitioWeb/"
+           class="hidden md:block px-5 py-2 bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+          Versión Alpha
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-black hover:bg-white/20">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+        <a href="index.html" class="block px-4 py-2 rounded-lg text-black font-semibold bg-white/20">Inicio</a>
+        <a href="SemestreI_II.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre I-II</a>
+        <a href="semestre_lll.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre III</a>
+        <a href="SemestreIV.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre IV</a>
+        <a href="SemestreV.html" class="block px-4 py-2 rounded-lg text-black font-semibold hover:bg-white/20">Semestre V</a>
+         <a href="Semestre VI.html" class="block px-4 py-2 text-sm text-white hover:bg-white/20 transition-colors">Semestre VI</a>
+        <a href="https://bossbudgetproyect.github.io/SitioWeb/"
+           class="block px-4 py-2 bg-yellow-400 text-purple-900 font-bold rounded-lg text-center">Versión Alpha</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="fade-in text-center">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <span class="bebas text-purple-700">FASE EN DESARROLLO</span>
+        </h1>
+      </div>
+
+    </section>
+      <section class="seccion-fondo">
+    <div>
+      <h1>Bienvenido</h1>
+      <p>Esta es una sección centrada con una imagen de fondo.</p>
+    </div>
+  </section>
+
+      <!-- Video -->
+      
+    </div>
+  
+  </div>
+   
+  <script>
+    const loader = document.getElementById("loader-wrapper");
+    window.addEventListener("load", () => setTimeout(() => loader.classList.add("hidden-loader"), 500));
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    menuToggle.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+
+    const dropdownButton = document.getElementById("semestres-dropdown-button");
+    const dropdownMenu = document.getElementById("semestres-dropdown-menu");
+    const dropdownArrow = document.getElementById("dropdown-arrow");
+
+    dropdownButton.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("hidden");
+      dropdownArrow.classList.toggle("rotate-180");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!dropdownButton.contains(event.target)) dropdownMenu.classList.add("hidden");
+    });
+  </script>
+</body>
+</html>
